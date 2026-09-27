@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Localish — Tala Mustafa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&amp;family=Roboto:wght@300;400&amp;family=Cormorant+Garamond:wght@400;500&amp;family=Poppins:wght@200;300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-bg:#fffdf9;
+  --color-ink:#141414;
+  --color-accent:#dba400;
+  --color-brown:#603913;
+  --color-cream:#fff5e0;
+  --color-ink-soft:rgba(0,0,0,0.85);
+  --color-ink-dim:rgba(0,0,0,0.55);
+  --color-line:rgba(96,57,19,0.22);
+  --font-display:'Cormorant Garamond', Georgia, serif;
+  --font-body:'Poppins', 'Helvetica Neue', Helvetica, sans-serif;
+  --fs-display:clamp(34px, 1.8vw + 10px, 50px);
+  --fs-title:clamp(19px, 1.2vw, 31px);
+  --fs-body:clamp(16px, 1.1vw, 21px);
+  --fs-small:clamp(14px, 0.85vw, 21px);
+  --tracking-display:0.12em;
+  --space-1:8px; --space-2:16px; --space-3:24px; --space-4:40px;
+  --space-5:64px; --space-6:96px; --space-7:140px;
+  --space-gutter:clamp(24px, 5vw, 80px);
+  --fs-h2:clamp(44px, 3.2vw + 16px, 88px);
+  --radius-card:clamp(16px, 1.6vw, 40px);
+  --fs-h3:clamp(34px, 2.5vw, 64px);
+  --shadow-card:0 20px 45px rgba(96,57,19,0.18);
+}
+html{scroll-behavior:smooth}
+body{margin:0;background:#F4F0FF;color:var(--color-ink);font-family:var(--font-body);font-weight:300;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--color-ink);text-decoration:none}
+a:hover{color:var(--color-ink)}
+a:focus-visible,button:focus-visible{outline:1px solid var(--color-ink-dim);outline-offset:5px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<meta name="ext-resource-dependency" content="images/localish-3.png">
+<meta name="ext-resource-dependency" content="uploads/localish part 2.mp4">
+</helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#F4EFE6"></rect><text x="100" y="118" text-anchor="middle" font-family="Rubik,Roboto,sans-serif" font-size="52" font-weight="500" fill="#0a0a0a">L</text></svg></template>
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:2;max-width:1920px;margin:0 auto;display:flex;align-items:center;padding:24px clamp(24px, 4.7vw, 90px);box-sizing:border-box;background:transparent">
+  <a href="https://personal-portfolio-website-cd-403b8b7d89.netlify.app/#work" aria-label="Back to work" style="display:flex;align-items:center;color:var(--color-ink)" style-hover="opacity:0.55">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 12H3" stroke="currentColor" stroke-width="1.4"></path><path d="M8.5 6 2.5 12l6 6" stroke="currentColor" stroke-width="1.4" fill="none"></path></svg>
+  </a>
+</header>
+
+<main style="max-width: 1920px; margin: 0 auto; box-sizing: border-box; padding: var(--space-7) var(--space-gutter) calc(var(--space-7) + 96px); background-color: #F4F0FF">
+  <div style="max-width:1600px;margin:0 auto">
+
+    <div data-screen-label="Localish — Project header" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 56px; margin: calc(-1 * var(--space-7)) 0 0; padding: 80px 0 120px; min-height: 100svh; box-sizing: border-box">
+      <div style="display: flex; flex-direction: column; gap: 54px">
+        <h1 style="margin:0;line-height:1"><img src="images/localish-logo.png" alt="Localish" style="display:block;width:clamp(220px,24vw,420px);height:auto"></h1>
+        <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.6;color:var(--color-ink-soft);max-width:38em;text-wrap:pretty">An app that connects you to a foreign city through what already feels like home reading your patterns of taste, pace and character, and matching you with locals who share them.</p>
+      </div>
+      <dl style="margin:0;display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-5)">
+        <div style="display:flex;flex-direction:column;gap:var(--space-1)">
+          <dt style="font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">Role</dt>
+          <dd style="margin:0;font-size:var(--fs-small);color:var(--color-ink-soft)">UI/UX &amp; product design</dd>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-1)">
+          <dt style="font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">Timeline</dt>
+          <dd style="margin:0;font-size:var(--fs-small);color:var(--color-ink-soft)">2026</dd>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-1)">
+          <dt style="font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">Team</dt>
+          <dd style="margin:0;font-size:var(--fs-small);color:var(--color-ink-soft)">Tala Mustafa, Tomer Shahar &amp; Meitar Sela</dd>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-1)">
+          <dt style="font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">Tools</dt>
+          <dd style="margin:0;font-size:var(--fs-small);color:var(--color-ink-soft)">Figma · Adobe Illustrator</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div style="position:fixed;left:var(--space-gutter);right:var(--space-gutter);bottom:24px;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <nav aria-label="Project views" style="display: inline-flex; border: 1px solid var(--color-line); border-radius: 999px; padding: 4px; gap: 4px; background-color: #F4F0FF">
+        <a href="#case-study" style="padding:10px 28px;border-radius:999px;font-size:var(--fs-small);letter-spacing:0.08em;text-transform:uppercase;background:{{ csBg }};color:{{ csInk }}" style-hover="opacity:0.8">Case study</a>
+        <a href="#overview" onClick="{{ goOverview }}" style="padding:10px 28px;border-radius:999px;font-size:var(--fs-small);letter-spacing:0.08em;text-transform:uppercase;background:{{ ovBg }};color:{{ ovInk }}" style-hover="opacity:0.8">Overview</a>
+      </nav>
+    </div>
+
+    <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="Localish — Overview" style="display:flex;flex-direction:column;gap:0;margin-top:var(--space-6)">
+        <sc-for list="{{ features }}" as="f" hint-placeholder-count="5">
+          <div style="margin:0 calc(50% - 50vw);min-height:100svh;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:stretch">
+            <div style="flex:2;min-width:min(460px,100%);background:{{ f.sectionBg }};display:flex;align-items:center;justify-content:center;padding:var(--space-5) var(--space-4);box-sizing:border-box">
+              <div style="position:relative;aspect-ratio:{{ f.boxAspect }};overflow:hidden;background:transparent;height:min(70vh,660px);max-width:100%">
+                <div role="img" aria-label="{{ f.title }} — screen preview" style="position:absolute;inset:0;background:{{ f.posterBg }}"></div>
+                <video data-feature-video="" data-crop-black="{{ f.cropBlack }}" crossOrigin="anonymous" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" preload="none" data-src="{{ f.video }}" onError="{{ hideBrokenVideo }}" aria-label="{{ f.title }} — screen recording" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></video>
+              </div>
+            </div>
+            <div style="flex:1;min-width:min(320px,100%);background:#FFFFFF;display:flex;flex-direction:column;justify-content:center;padding:var(--space-5) var(--space-gutter);box-sizing:border-box">
+              <span style="font-family:monospace;font-size:13px;letter-spacing:0.2em;color:#25F179">{{ f.num }}</span>
+              <h3 style="margin:var(--space-2) 0 0;font-size:var(--fs-title);font-weight:400;line-height:1.3;color:#04053A">{{ f.title }}</h3>
+              <p style="margin:var(--space-3) 0 0;font-size:20px;font-weight:300;line-height:1.8;color:#333333;max-width:33em;text-wrap:pretty">{{ f.text }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isCase }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Localish — Case study" style="display:flex;flex-direction:column;gap:var(--space-6);margin:var(--space-5) calc(50% - 50vw) 0;padding:var(--space-5) var(--space-gutter);background:#FFFFFF">
+        <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">The Problem</p>
+          </div>
+          <div style="flex:2;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-4)">
+            <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:#696867D9;text-wrap:pretty">How do we travel today? Travelers say they're looking for a personal, authentic local experience and end up frustrated by the feeling of missing out (Booking.com, 2023–24).<br>We mapped three reasons why:</p>
+            <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+              <div style="display:flex;gap:var(--space-3)">
+                <span style="font-family:monospace;font-size:13px;letter-spacing:0.2em;color:#25F179;padding-top:6px">01</span>
+                <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:#696867D9;text-wrap:pretty"><strong style="font-weight:400;color:#000252">Information overload.</strong> The traveler is surrounded by recommendations, ratings and lists, but struggles to understand what truly fits them. Choosing becomes a burden.</p>
+              </div>
+              <div style="display:flex;gap:var(--space-3)">
+                <span style="font-family:monospace;font-size:13px;letter-spacing:0.2em;color:#25F179;padding-top:6px">02</span>
+                <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:#696867D9;text-wrap:pretty"><strong style="font-weight:400;color:#000252">Generic experience.</strong> Algorithms offer general solutions that don't distinguish between people, tastes or personal context. The experience loses depth.</p>
+              </div>
+              <div style="display:flex;gap:var(--space-3)">
+                <span style="font-family:monospace;font-size:13px;letter-spacing:0.2em;color:#25F179;padding-top:6px">03</span>
+                <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:#696867D9;text-wrap:pretty"><strong style="font-weight:400;color:#000252">Lack of connection.</strong> There's no link between our life at home and the way we experience a new city. Localness stays an idea, not an experience.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">Who it's for</p>
+          </div>
+          <div style="flex:2;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-dim);text-wrap:pretty"><strong style="font-weight:400;color:#000252">Travelers</strong> — curious and open, they enjoy spontaneity and unexpected experiences, and prefer discovering a city through moments, people and atmosphere.</p>
+            <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-dim);text-wrap:pretty"><strong style="font-weight: 400; color: var(--color-ink);">Locals</strong> — of every age: students, young people, pensioners.<br>who want to share their personal knowledge of their city and earn an income on the side.</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">The Solution</p>
+          </div>
+          <div style="flex:2;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-dim);text-wrap:pretty">A connection between tourists and locals through personal matching and experiences that feel real.</p>
+            <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-dim);text-wrap:pretty"><strong style="font-weight: 400; color: var(--color-ink);">Personal matching</strong> — recommendations built from your own taste and the places you already love. <br><strong style="font-weight: 400; color: var(--color-ink);">Local experience</strong> — finding the places that let you feel local from day one. <br><strong style="font-weight: 400; color: var(--color-ink);">One continuous flow</strong> — every stage of the experience lives in one place: simple, clear and intuitive.</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">DESIGN SYSTEM</p>
+          </div>
+          <div style="flex:2;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-4)">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(140px,100%),1fr));gap:var(--space-2)">
+              <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <div style="width:100%;height:64px;border-radius:12px;background:#000252"></div>
+                <span style="font-family:monospace;font-size:12px;letter-spacing:0.08em;color:var(--color-ink-dim)">#000252</span>
+                <span style="font-size:13px;font-weight:300;line-height:1.4;color:var(--color-ink-dim);text-align:center">Primary</span>
+              </div><div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <div style="width:100%;height:64px;border-radius:12px;background:#C9B6FC"></div>
+                <span style="font-family:monospace;font-size:12px;letter-spacing:0.08em;color:var(--color-ink-dim)">#C9B6FC</span>
+                <span style="font-size:13px;font-weight:300;line-height:1.4;color:var(--color-ink-dim);text-align:center">Secondary</span>
+              </div>
+              
+              
+              <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <div style="width:100%;height:64px;border-radius:12px;background:#F4F0FF;border:1.5px solid #1B1464;box-sizing:border-box"></div>
+                <span style="font-family:monospace;font-size:12px;letter-spacing:0.08em;color:var(--color-ink-dim)">#F4F0FF</span>
+                <span style="font-size:13px;font-weight:300;line-height:1.4;color:var(--color-ink-dim);text-align:center">Accent</span>
+              </div><div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <div style="width:100%;height:64px;border-radius:12px;background:#25F179"></div>
+                <span style="font-family:monospace;font-size:12px;letter-spacing:0.08em;color:var(--color-ink-dim)">#25F179</span>
+                <span style="font-size:13px;font-weight:300;line-height:1.4;color:var(--color-ink-dim);text-align:center">the asterisk</span>
+              </div>
+              
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+              <div style="flex:1;min-width:min(220px,100%);border:1.5px solid #1B1464;border-radius:16px;background:#F4F0FE;padding:var(--space-3);box-sizing:border-box;display:flex;flex-direction:column;gap:8px">
+                <span style="font-family:monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-ink-dim)">MONTSERRAT BOLD— HEADINGS</span>
+                <span style="font-size: 26px; font-weight: 700; color: #000252; font-family: Montserrat">Localish</span>
+              </div>
+              <div style="flex:1;min-width:min(220px,100%);border:1.5px solid #1B1464;border-radius:16px;background:#F4F0FE;padding:var(--space-3);box-sizing:border-box;display:flex;flex-direction:column;gap:8px">
+                <span style="font-family: monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ink-dim);">MONTSERRAT&nbsp;REGULAR — BODY</span>
+                <span style="font-family: Montserrat; font-size: 22px; font-weight: 400; color: var(--color-ink)">Feel local from day one</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">LOGO</p>
+          </div>
+          <div style="flex:2;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-3)">
+            <img src="images/localish-logo.png" alt="Localish logo" style="display:block;width:clamp(180px,18vw,300px);height:auto">
+            <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-dim);text-wrap:pretty">The asterisk in the Localish mark stands for what never appears in the headline, the small details, the hidden places, and the moments between the lines.</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">FLOW MAPPING</p>
+          </div>
+          <div style="flex:2;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-5)">
+            
+            <div aria-label="How it works — flow" style="display:flex;align-items:flex-start;flex-wrap:wrap;gap:var(--space-3) 0;padding:var(--space-3) 0">
+              <sc-for list="{{ processSteps }}" as="s" hint-placeholder-count="5">
+                <div style="display:flex;flex-direction:column;flex:1;min-width:150px">
+                  <div style="border:1.5px solid #1B1464;border-radius:10px;background:#F4F0FE;padding:8px 12px;text-align:center;font-size:15px;font-weight:600;color:#1B1464;align-self:stretch;height:64px;box-sizing:border-box;display:flex;align-items:center;justify-content:center">{{ s.label }}</div>
+                  <span style="font-size:26px;line-height:1;font-weight:600;color:#25F179;text-align:center;margin-top:18px">*</span>
+                  <p style="margin:8px 0 0;font-size:14px;font-weight:300;line-height:1.65;color:var(--color-ink);text-align:center;padding:0 8px;text-wrap:pretty">{{ s.text }}</p>
+                </div>
+                <sc-if value="{{ s.hasLine }}" hint-placeholder-val="{{ true }}">
+                  <div style="flex:none;width:22px;border-top:1px dashed #1B1464;margin-top:24px"></div>
+                </sc-if>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">APP STORE</p>
+          </div>
+          <div style="flex:2;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:transparent;height:calc(100vh - 240px);max-width:100%">
+              <video data-feature-video="" crossOrigin="anonymous" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" src="https://res.cloudinary.com/a9hkhucx/video/upload/v1788785088/Screen_Recording_2026-09-07_153613_utqkmt.mp4" onError="{{ hideBrokenVideo }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></video>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:#000252">Outcome</p>
+          </div>
+          <div style="flex:2;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-dim);text-wrap:pretty">A smarter way to explore: personalized routes, real local insights, and a travel experience made just for you all the stages of the journey in one continuous, intuitive flow.</p>
+            <a href="#overview" onClick="{{ goOverview }}" style="display:inline-flex;align-items:center;gap:10px;margin-top:var(--space-4);padding:14px 32px;border-radius:999px;background:#000252;color:#FFFFFF;font-size:var(--fs-small);letter-spacing:0.08em;text-transform:uppercase" style-hover="background:#25F179;color:#000252">Show the app<span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultView&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;case-study&quot;,&quot;options&quot;:[&quot;overview&quot;,&quot;case-study&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behavior&quot;},&quot;autoplayVideos&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+class Component extends DCLogic {
+  state = { view: 'case-study' };
+  features() {
+    return [
+      { num: '01', title: 'Local search — the tourist\'s side', text: 'You share places you already love in your own city. The system translates those choices into vibe, style and values — and produces a match that feels precise, natural and authentic for the experience in Berlin.', video: 'https://res.cloudinary.com/a9hkhucx/video/upload/v1788607695/localish_part_1_wayqjy.mp4', crop: true, side: 'tourist', poster: '' },
+      { num: '02', title: 'Building the route — the local\'s side', text: 'The local composes an experience that feels right and personal — by feeling, connection and a real familiarity with the city. The route is built from local intuition and tailored to each tourist.', video: 'uploads/localish part 2.mp4', crop: true, side: 'local', poster: 'images/localish-3.png' },
+      { num: '03', title: 'Receiving the route & wandering the city', text: 'Every point on the route comes with personal recommendations, small tips and notes from the field. Along the way the tourist can react, ask questions and share feedback in real time — turning the route into a living, dynamic experience.', video: 'https://res.cloudinary.com/a9hkhucx/video/upload/v1788606849/Screen_Recording_2026-09-03_182054_sgurxh.mp4', side: 'tourist', poster: '' },
+      { num: '04', title: 'A spontaneous event comes up', text: 'During the day, the local can update on events in real time. If they discover something special happening in the city — a show, a one-off unplanned event — they can send the tourist an instant alert with the recommendation.', video: 'https://res.cloudinary.com/a9hkhucx/video/upload/v1788607761/Screen_Recording_2026-09-03_182227_ozj9mw.mp4', side: 'local', poster: '' },
+      { num: '05', title: 'The tourist decides in real time', text: 'The tourist receives the notification in real time and can choose whether to add it to the route and visit the place.', video: 'https://res.cloudinary.com/a9hkhucx/video/upload/v1788611065/Screen_Recording_2026-09-05_152353_w8rz8z.mp4', side: 'tourist', poster: '' },
+    ];
+  }
+  syncView() {
+    const v = location.hash.replace('#', '') === 'case-study' ? 'case-study' : 'overview';
+    if (v !== this.state.view) this.setState({ view: v });
+    if (!this._userHash) return;
+    const label = v === 'overview' ? 'Overview' : 'Case study';
+    const go = () => {
+      const s = document.querySelector('[data-screen-label$="— ' + label + '"]');
+      if (!s) return;
+      const y = s.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    };
+    setTimeout(go, 60);
+  }
+  renderVals() {
+    const view = this.state.view;
+    const on = '#000252';
+    const steps = [
+      { label: 'Local search', text: 'Choosing favorite places in your home city' },
+      { label: 'Identify style', text: 'Analyzing personal preferences and vibe from those choices' },
+      { label: 'Translate to destination', text: 'Finding places with a similar feeling in the destination city' },
+      { label: 'Match & choose', text: 'You mark what feels right, and the system refines its recommendations accordingly' },
+      { label: 'Build the route', text: 'A personally tailored route connects the chosen places into one flowing city experience.' },
+    ];
+    return {
+      processSteps: steps.map((s, i) => ({ ...s, num: '0' + (i + 1), hasLine: i < steps.length - 1 })),
+      features: this.features().map((f) => ({ ...f, dir: 'row-reverse', cropBlack: f.crop ? '1' : '',
+        sectionBg: '#04053A',
+        sectionRadius: 'var(--radius-card)',
+        sectionPad: 'var(--space-5) var(--space-4)',
+        boxAspect: f.crop ? '16/9' : '9/19',
+        boxWidth: f.crop ? '100%' : 'min(100%, 341px)',
+        titleColor: f.side === 'local' ? '#FFFFFF' : '#111111',
+        textColor: f.side === 'local' ? 'rgba(255,255,255,0.85)' : '#111111',
+        posterBg: f.poster ? "url('" + f.poster + "') center / contain no-repeat" : 'transparent' })),
+      hideBrokenVideo: (e) => { e.currentTarget.style.display = 'none'; },
+      goOverview: () => {
+        setTimeout(() => {
+          const s = document.querySelector('[data-screen-label="Localish — Overview"]');
+          if (!s || !s.firstElementChild) return;
+          const y = s.firstElementChild.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }, 60);
+      },
+      isOverview: view === 'overview',
+      isCase: view === 'case-study',
+      ovBg: view === 'overview' ? on : 'transparent',
+      ovInk: view === 'overview' ? '#fff' : 'var(--color-ink)',
+      csBg: view === 'case-study' ? on : 'transparent',
+      csInk: view === 'case-study' ? '#fff' : 'var(--color-ink)',
+    };
+  }
+  setupCrop(v) {
+    v.style.opacity = '0';
+    v.preload = 'auto';
+    let tries = 0;
+    const done = () => { v.style.opacity = '1'; v.dataset.cropped = '1'; v.loop = true; v.play().catch(() => {}); };
+    const measure = () => {
+      if (v.dataset.cropped) return;
+      const vw = v.videoWidth, vh = v.videoHeight;
+      if (!vw) return;
+      const c = document.createElement('canvas');
+      c.width = 320; c.height = Math.max(2, Math.round(320 * vh / vw));
+      const ctx = c.getContext('2d', { willReadFrequently: true });
+      ctx.drawImage(v, 0, 0, c.width, c.height);
+      let d;
+      try { d = ctx.getImageData(0, 0, c.width, c.height).data; } catch (err) {
+        // Canvas tainted: reload with CORS enabled and retry
+        if (!v.dataset.corsRetry) {
+          v.dataset.corsRetry = '1';
+          const src = v.currentSrc || v.src;
+          v.crossOrigin = 'anonymous';
+          v.src = src;
+          v.addEventListener('loadeddata', measure, { once: true });
+          v.load();
+        } else if (tries++ < 8) {
+          v.addEventListener('timeupdate', measure, { once: true });
+        } else done();
+        return;
+      }
+      const W = c.width, H = c.height;
+      // flood-fill near-black connected to the border = background; content black stays
+      const bg = new Uint8Array(W * H);
+      const dark = (p) => d[p * 4] < 30 && d[p * 4 + 1] < 30 && d[p * 4 + 2] < 30;
+      const stack = [];
+      for (let x = 0; x < W; x++) { stack.push(x, (H - 1) * W + x); }
+      for (let y = 0; y < H; y++) { stack.push(y * W, y * W + W - 1); }
+      let anyContent = false;
+      while (stack.length) {
+        const p = stack.pop();
+        if (bg[p] || !dark(p)) continue;
+        bg[p] = 1;
+        const x = p % W, y = (p / W) | 0;
+        if (x > 0) stack.push(p - 1);
+        if (x < W - 1) stack.push(p + 1);
+        if (y > 0) stack.push(p - W);
+        if (y < H - 1) stack.push(p + W);
+      }
+      for (let p = 0; p < W * H; p++) if (!bg[p] && !dark(p)) { anyContent = true; break; }
+      if (!anyContent) { if (tries++ < 8) v.addEventListener('timeupdate', measure, { once: true }); return; }
+      // build alpha mask: transparent where background, opaque elsewhere (dilate bg 1px to kill edge lines)
+      const m = document.createElement('canvas');
+      m.width = W; m.height = H;
+      const mctx = m.getContext('2d');
+      const mi = mctx.createImageData(W, H);
+      for (let p = 0; p < W * H; p++) {
+        const x = p % W, y = (p / W) | 0;
+        let isBg = bg[p];
+        if (!isBg) {
+          if ((x > 0 && bg[p - 1]) || (x < W - 1 && bg[p + 1]) || (y > 0 && bg[p - W]) || (y < H - 1 && bg[p + W])) isBg = 1;
+        }
+        mi.data[p * 4 + 3] = isBg ? 0 : 255;
+      }
+      mctx.putImageData(mi, 0, 0);
+      const url = 'url(' + m.toDataURL() + ')';
+      const box = v.parentElement;
+      box.style.background = 'transparent';
+      box.style.boxShadow = 'none';
+      box.style.borderRadius = '0';
+      v.style.webkitMaskImage = url;
+      v.style.maskImage = url;
+      v.style.webkitMaskSize = '100% 100%';
+      v.style.maskSize = '100% 100%';
+      // measure content bounds and resize the box so visible content fills its full height
+      let cminX = W, cminY = H, cmaxX = -1, cmaxY = -1;
+      for (let p = 0; p < W * H; p++) {
+        if (!bg[p] && !dark(p)) {
+          const x = p % W, y = (p / W) | 0;
+          if (x < cminX) cminX = x; if (x > cmaxX) cmaxX = x;
+          if (y < cminY) cminY = y; if (y > cmaxY) cmaxY = y;
+        }
+      }
+      if (cmaxX > cminX && cmaxY > cminY) {
+        const nx = cminX / W, ny = cminY / H;
+        const nw = (cmaxX - cminX + 1) / W, nh = (cmaxY - cminY + 1) / H;
+        // box aspect = content aspect; video oversized so content fills the box exactly
+        box.style.aspectRatio = String((nw * vw) / (nh * vh));
+        v.style.inset = 'auto';
+        v.style.left = (-nx / nw * 100) + '%';
+        v.style.top = (-ny / nh * 100) + '%';
+        v.style.width = (1 / nw * 100) + '%';
+        v.style.height = (1 / nh * 100) + '%';
+        v.style.objectFit = 'fill';
+      }
+      const poster = v.previousElementSibling;
+      if (poster && poster.getAttribute('role') === 'img') poster.style.opacity = '0';
+      done();
+    };
+    if (v.readyState >= 2) measure();
+    else v.addEventListener('loadeddata', measure, { once: true });
+    setTimeout(() => { if (!v.dataset.cropped) done(); }, 8000);
+    v.load();
+  }
+  scanVideos() {
+    document.querySelectorAll('video[data-feature-video]').forEach((v) => {
+      const s = v.getAttribute('data-src'), p = v.getAttribute('data-poster');
+      if (s && v.getAttribute('src') !== s) v.setAttribute('src', s);
+      if (p && v.getAttribute('poster') !== p) v.setAttribute('poster', p);
+    });
+    if (!this._vObs) return;
+    document.querySelectorAll('video[data-feature-video]').forEach((v) => {
+      if (v.dataset.obs) return;
+      v.dataset.obs = '1';
+      this.setupCrop(v);
+      v.muted = true;
+      this._vObs.observe(v);
+    });
+  }
+  componentDidMount() {
+    this._onHash = () => { this._userHash = true; this.syncView(); };
+    window.addEventListener('hashchange', this._onHash);
+    if (location.hash) this.syncView();
+    else if ((this.props.defaultView ?? 'case-study') === 'overview') this.setState({ view: 'overview' });
+    const allow = (this.props.autoplayVideos ?? true) && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this._vObs = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting && allow) e.target.play().catch(() => {});
+        else e.target.pause();
+      }
+    }, { threshold: 0.35 });
+    this.scanVideos();
+  }
+  componentDidUpdate() { this.scanVideos(); }
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this._onHash);
+    if (this._vObs) this._vObs.disconnect();
+  }
+}
+</script>
+</body>
+</html>

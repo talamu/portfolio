@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Al Mansub — Tala Mustafa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&amp;family=Roboto:wght@300;400&amp;family=Cormorant+Garamond:wght@400;500&amp;family=Poppins:wght@200;300;400;600&amp;family=Roboto:wght@300;400&amp;family=Noto+Naskh+Arabic:wght@400;500&amp;family=Space+Mono&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-bg:#fdf5e4;
+  --color-ink:#141414;
+  --color-accent:#f0654a;
+  --color-ink-soft:rgba(0,0,0,0.85);
+  --color-ink-dim:rgba(0,0,0,0.55);
+  --color-line:rgba(0,0,0,0.18);
+  --font-display:'Cormorant Garamond', Georgia, serif;
+  --font-body:'Poppins', 'Helvetica Neue', Helvetica, sans-serif;
+  --fs-display:clamp(34px, 1.8vw + 10px, 50px);
+  --fs-title:clamp(19px, 1.2vw, 31px);
+  --fs-body:clamp(16px, 1.1vw, 21px);
+  --fs-small:clamp(14px, 0.85vw, 21px);
+  --tracking-display:0.12em;
+  --space-1:8px; --space-2:16px; --space-3:24px; --space-4:40px;
+  --space-5:64px; --space-6:96px; --space-7:140px;
+  --space-gutter:clamp(24px, 5vw, 80px);
+  --fs-h2:clamp(44px, 3.2vw + 16px, 88px);
+  --radius-card:clamp(16px, 1.6vw, 40px);
+  --fs-h3:clamp(34px, 2.5vw, 64px);
+  --shadow-card:0 20px 45px rgba(90,90,90,0.22);
+}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--color-bg);color:var(--color-ink);font-family:var(--font-body);font-weight:300;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--color-ink);text-decoration:none}
+a:hover{color:var(--color-ink)}
+a:focus-visible,button:focus-visible{outline:1px solid var(--color-ink-dim);outline-offset:5px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<script src="./image-slot.js"></script>
+<meta name="ext-resource-dependency" content="images/almansub-site.png">
+<meta name="ext-resource-dependency" content="uploads/opening.mp4">
+</helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FCF5E3"></rect><text x="100" y="118" text-anchor="middle" font-family="Rubik,Roboto,sans-serif" font-size="52" font-weight="500" fill="#0a0a0a">AM</text></svg></template>
+
+<header style="position: fixed; top: 0; left: 0; right: 0; z-index: 2; max-width: 1920px; margin: 0 auto; display: flex; align-items: center; padding: 24px clamp(24px, 4.7vw, 90px); box-sizing: border-box; background: transparent; height: 64px">
+  <a href="https://personal-portfolio-website-cd-403b8b7d89.netlify.app/#work" data-back="" aria-label="Back to work" style="display:flex;align-items:center;color:var(--color-ink);transition:color 0.25s" style-hover="opacity:0.55">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 12H3" stroke="currentColor" stroke-width="1.4"></path><path d="M8.5 6 2.5 12l6 6" stroke="currentColor" stroke-width="1.4" fill="none"></path></svg>
+  </a>
+</header>
+
+<main style="max-width: 1920px; margin: 0 auto; box-sizing: border-box; padding: var(--space-7) var(--space-gutter) calc(var(--space-7) + 96px); background-color: #FBF5E2">
+  <div style="max-width:1600px;margin:0 auto">
+
+    <div data-screen-label="Al Mansub — Project header" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 32px; margin: calc(-1 * var(--space-7)) calc(50% - 50vw) 0; padding: calc(56px + var(--space-2)) var(--space-gutter) calc(var(--space-2) + 72px); min-height: calc(100svh - 56px); box-sizing: border-box; background-color: #FCF5E3; position: relative">
+      <div style="max-width: 1600px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 42px; box-sizing: border-box; position: relative; top: 24px">
+      <div style="display: flex; flex-direction: column; gap: 32px; width: 100%">
+        <div style="display: flex; align-items: flex-end; gap: 24px; width: 100%; position: relative; top: -23px">
+          <h1 style="margin: 0; font-size: 32px; font-weight: 300; line-height: 1.05; color: var(--color-ink)">Al Mansub</h1>
+          <img src="uploads/Logo.jpg" alt="Al Mansub calligraphic logo" style="display: block; margin-left: auto; max-width: 40%; object-fit: contain; object-position: right center; mix-blend-mode: multiply; width: 348px; height: 238px; margin-top: 0px">
+        </div>
+        <p style="margin: 0; font-size: var(--fs-body); font-weight: 300; line-height: 1.6; color: var(--color-ink-soft); max-width: 47em; text-wrap: pretty; width: 1121px">Just as spoken language has its dialects, so too does the written word. <br>The proportional Arabic script developed over centuries across several geographic, <br>spiritual, and political centers. <br>At <strong>ALMANSUB.design</strong>, you can trace the evolution of the script through a comparison of styles, historical artifacts, and formal principles. <br>The project reveals the nuances of how form developed across different traditions, cultures, and eras the forces that shaped one of the world's most influential writing systems.<br>My final project at Shenkar College.</p>
+      </div>
+      <dl style="margin:0;display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-5)">
+        <div style="display:flex;flex-direction:column;gap:var(--space-1)">
+          <dt style="font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">Role</dt>
+          <dd style="margin:0;font-size:var(--fs-small);color:var(--color-ink-soft)">Research, UI/UX &amp; visual design</dd>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-1)">
+          <dt style="font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">Timeline</dt>
+          <dd style="margin:0;font-size:var(--fs-small);color:var(--color-ink-soft)">Final project · 2026</dd>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;gap:var(--space-1)">
+          <dt style="font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">Tools</dt>
+          <dd style="margin:0;font-size:var(--fs-small);color:var(--color-ink-soft)">Figma · Illustrator · After Effects · Claude Code</dd>
+        </div>
+      </dl>
+      </div>
+    </div>
+
+    <div style="position:fixed;left:var(--space-gutter);right:var(--space-gutter);bottom:24px;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <nav aria-label="Project views" style="display:inline-flex;border:1px solid var(--color-line);border-radius:999px;padding:4px;gap:4px;background:var(--color-bg)">
+        <a href="#case-study" style="padding:10px 28px;border-radius:999px;font-size:var(--fs-small);letter-spacing:0.08em;text-transform:uppercase;background:{{ csBg }};color:{{ csInk }}" style-hover="opacity:0.8">Case study</a>
+        <a href="#overview" style="padding:10px 28px;border-radius:999px;font-size:var(--fs-small);letter-spacing:0.08em;text-transform:uppercase;background:{{ ovBg }};color:{{ ovInk }}" style-hover="opacity:0.8">Overview</a>
+      </nav>
+      <a href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:12px 32px;border:1px solid var(--color-ink);border-radius:999px;font-size:var(--fs-small);letter-spacing:0.08em;text-transform:uppercase;color:var(--color-ink);background:var(--color-bg)" style-hover="background:var(--color-ink);color:#fff">Visit the live site →</a>
+    </div>
+
+    <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Al Mansub — Overview" style="display:flex;flex-direction:column;gap:0;margin-top:var(--space-6)">
+        <sc-for list="{{ features }}" as="f" hint-placeholder-count="6">
+          <div style="margin:0 calc(50% - 50vw);min-height:100svh;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:stretch">
+            <div data-dark="" style="flex:2;min-width:min(460px,100%);background:#141414;display:flex;align-items:center;justify-content:center;padding:var(--space-5) var(--space-4);box-sizing:border-box">
+              <div style="border-radius:var(--radius-card);overflow:hidden;box-shadow:var(--shadow-card);background:#f3e9d2;max-width:100%;line-height:0">
+                <video data-feature-video="" muted="{{ true }}" loop="{{ f.loop }}" playsinline="{{ true }}" preload="none" data-src="{{ f.video }}" data-poster="{{ f.poster }}" aria-label="{{ f.title }} — screen recording" style="display:block;max-height:min(70vh,660px);max-width:100%;width:auto;height:auto"></video>
+              </div>
+            </div>
+            <div style="flex:1;min-width:min(320px,100%);background:#FFFFFF;display:flex;flex-direction:column;justify-content:center;padding:var(--space-5) var(--space-gutter);box-sizing:border-box">
+              <span style="font-family:monospace;font-size:13px;letter-spacing:0.2em;color:var(--color-accent)">{{ f.num }}</span>
+              <h3 style="margin:var(--space-2) 0 0;font-size:var(--fs-title);font-weight:400;line-height:1.3;color:var(--color-ink)">{{ f.title }}</h3>
+              <p style="margin:var(--space-3) 0 0;font-size:20px;font-weight:300;line-height:1.8;color:#333333;max-width:33em;text-wrap:pretty">{{ f.text }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isCase }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="Al Mansub — Case study" style="display:flex;flex-direction:column;gap:var(--space-6);margin:var(--space-5) calc(50% - 50vw) 0;padding:var(--space-5) var(--space-gutter);background-color:var(--color-bg)">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">The Problem</p>
+          </div>
+          <div style="flex:2.6;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-3)">
+            <p style="margin: 0; font-size: var(--fs-body); font-weight: 300; line-height: 1.8; color: #696867D9; text-wrap: pretty">The history of Islamic calligraphy is well documented but almost entirely in academic form: dense, text-heavy, and inaccessible to anyone outside the field. And its visual language assumes you already read Arabic.</p>
+            <p style="margin: 0; font-size: var(--fs-body); font-weight: 300; line-height: 1.8; color: #696867D9; text-wrap: pretty">I set out to solve a design problem: how do you translate an ancient, mathematical system of proportion into a visual experience that anyone including someone who has never read a word of Arabic can understand and feel?</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">Research</p>
+          </div>
+          <div style="flex:2.6;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-dim);text-wrap:pretty">The project rests on primary sources manuscripts and acadime researches and on conversations with a scholar and a practicing calligrapher, who helped me verify both the history and the mechanics of the script. <br>Beyond gathering images, the research meant getting the history right, Holding the distinctions rather than flattening them into a tidy story was central to the project's integrity.</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">Process</p>
+          </div>
+          <div style="flex:2.6;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-5)">
+            
+            <div aria-label="Process timeline" style="display:flex;align-items:flex-start;flex-wrap:wrap;gap:var(--space-3) 0;padding:var(--space-3) 0">
+              <sc-for list="{{ processSteps }}" as="s" hint-placeholder-count="5">
+                <div style="display:flex;flex-direction:column;flex:1;min-width:120px">
+                  <div style="border:1.5px solid var(--color-ink);border-radius:10px;background:#F3E9D2;padding:8px 12px;text-align:center;font-size:15px;font-weight:600;letter-spacing:0.08em;color:var(--color-ink);align-self:stretch;height:64px;box-sizing:border-box;display:flex;align-items:center;justify-content:center">{{ s.label }}</div>
+                  <p style="margin:8px 0 0;font-family:monospace;font-size:13px;letter-spacing:0.2em;color:var(--color-ink-dim);text-align:center">{{ s.num }}</p>
+                </div>
+                <sc-if value="{{ s.hasLine }}" hint-placeholder-val="{{ true }}">
+                  <div style="flex:none;width:22px;border-top:1px dashed var(--color-ink);margin-top:32px"></div>
+                </sc-if>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">EARLY HIGH-FIDELITY WIREFRAMES</p>
+          </div>
+          <div style="flex:2.6;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-dim);text-wrap:pretty">Early high-fidelity explorations of the key screens, the scrollytelling history timeline, the script journey map, and the interactive script tester.</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:var(--space-3)">
+              <img src="uploads/Slide 16_9.png" alt="Wireframe — The Evolution of Orthography timeline screen" style="width:100%;height:auto;display:block;border:1.5px solid var(--color-ink);border-radius:16px;box-sizing:border-box">
+              <img src="uploads/Property 1=Component 1, Property 2=Default.png" alt="Wireframe — The Living Journey of the Script map screen" style="width:100%;height:auto;display:block;border:1.5px solid var(--color-ink);border-radius:16px;box-sizing:border-box">
+              <img src="uploads/Slide 16_9 - 1.png" alt="Wireframe — Arabic Script tester screen" style="width:100%;height:auto;display:block;border:1.5px solid var(--color-ink);border-radius:16px;box-sizing:border-box">
+              <img src="uploads/Property 1=Slide 16_9 - 18.png" alt="Wireframe — 7th Century history chapter screen" style="width:100%;height:auto;display:block;border:1.5px solid var(--color-ink);border-radius:16px;box-sizing:border-box">
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">Design system</p>
+          </div>
+          <div style="flex:2.6;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-4)">
+            
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(140px,100%),1fr));gap:var(--space-2)">
+              <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <div style="width:100%;height:64px;border-radius:12px;background:#FFF8EB;border:1.5px solid #000000;box-sizing:border-box"></div>
+                <span style="font-family:monospace;font-size:12px;letter-spacing:0.08em;color:var(--color-ink-dim)">#FFF8EB</span>
+                <span style="font-size:13px;font-weight:300;line-height:1.4;color:var(--color-ink-dim);text-align:center">Page background</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <div style="width:100%;height:64px;border-radius:12px;background:#000000"></div>
+                <span style="font-family:monospace;font-size:12px;letter-spacing:0.08em;color:var(--color-ink-dim)">#000000</span>
+                <span style="font-size:13px;font-weight:300;line-height:1.4;color:var(--color-ink-dim);text-align:center">Headings, outlines, calligraphy</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <div style="width:100%;height:64px;border-radius:12px;background:#524F55"></div>
+                <span style="font-family:monospace;font-size:12px;letter-spacing:0.08em;color:var(--color-ink-dim)">#524F55</span>
+                <span style="font-size:13px;font-weight:300;line-height:1.4;color:var(--color-ink-dim);text-align:center">Body text</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <div style="width:100%;height:64px;border-radius:12px;background:#F55E4D"></div>
+                <span style="font-family:monospace;font-size:12px;letter-spacing:0.08em;color:var(--color-ink-dim)">#F55E4D</span>
+                <span style="font-size:13px;font-weight:300;line-height:1.4;color:var(--color-ink-dim);text-align:center">Nuqtas</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+              <div style="flex:1;min-width:min(220px,100%);border:1.5px solid #000000;border-radius:16px;background:#FFF8EB;padding:var(--space-3);box-sizing:border-box;display:flex;flex-direction:column;gap:8px">
+                <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8A8A">Roboto — Latin</span>
+                <span style="font-family:Roboto,sans-serif;font-size:26px;font-weight:400;letter-spacing:0.3em;text-transform:uppercase;color:#000000">Al Mansub</span>
+              </div>
+              <div style="flex:1;min-width:min(220px,100%);border:1.5px solid #000000;border-radius:16px;background:#FFF8EB;padding:var(--space-3);box-sizing:border-box;display:flex;flex-direction:column;gap:8px">
+                <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8A8A">Noto Naskh — Arabic</span>
+                <span dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-size:30px;color:#000000">المنسوب</span>
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">Logo</p>
+          </div>
+          <div style="flex:2.6;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-3)">
+            <img src="uploads/Logo.jpg" alt="Al Mansub calligraphic logo" style="display:block;width:min(360px,100%);height:auto;object-fit:contain;mix-blend-mode:multiply;align-self:flex-start">
+            <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-dim);text-wrap:pretty">The wordmark is thuluth calligraphy of "المنسوب" (Al Mansub) annotated with the proportional system.</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 80px">
+          <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">Outcome</p>
+          </div>
+          <div style="flex:2.6;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3);display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-3)">
+            <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-dim);text-wrap:pretty">The final site turns a thousand year old measuring method into something you can see, touch and compare — an interactive platform where the proportional system, the history of the script and its journey across the Islamic world unfold screen by screen. Explore the finished pages in the overview.</p>
+            <a href="#overview" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:12px 32px;border:1px solid var(--color-ink);border-radius:999px;font-size:var(--fs-small);letter-spacing:0.08em;text-transform:uppercase;color:var(--color-ink)" style-hover="background:var(--color-ink);color:#fff">See the site in action →</a>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <div data-screen-label="Al Mansub — Final presentation" style="display:flex;flex-direction:column;gap:var(--space-4);margin-top:var(--space-7)">
+      <div style="display:flex;flex-direction:column;gap:var(--space-2);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+        <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">Final presentation</p>
+        <p style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-soft);max-width:44em;text-wrap:pretty">Moments from the final project presentation at Shenkar College.</p>
+      </div><div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:minmax(160px,22vh);grid-auto-flow:dense;gap:var(--space-3)">
+        <img src="uploads/WhatsApp Image 2026-08-25 at 19.11.40.jpeg" alt="Al Mansub installation — calligraphy wall and interactive screen" style="grid-column:span 3;grid-row:span 3;width:100%;height:100%;object-fit:cover;border-radius:20px;display:block">
+        <img src="uploads/iloveimg-converted (1)/IMG_8274.jpg" alt="The Al Mansub installation — desk, screen and calligraphy wall" style="grid-column:span 3;grid-row:span 3;width:100%;height:100%;object-fit:cover;border-radius:20px;display:block">
+        <img src="uploads/iloveimg-converted (1)/IMG_8242.jpg" alt="The 7 Scripts index on the installation screen" style="grid-column:span 4;grid-row:span 2;width:100%;height:100%;object-fit:cover;border-radius:20px;display:block">
+        <img src="uploads/WhatsApp Image 2026-09-18 at 17.42.02.jpeg" alt="Presenting the Dhirani alphabet on screen at the exhibition" style="grid-column:span 2;grid-row:span 2;width:100%;height:100%;object-fit:cover;border-radius:20px;display:block">
+        
+        <img src="uploads/WhatsApp Image.jpeg" alt="Hands tracing the calligraphy wall print" style="grid-column:span 2;grid-row:span 2;width:100%;height:100%;object-fit:cover;border-radius:20px;display:block">
+        <img src="uploads/iloveimg-converted (1)/IMG_8230.jpg" alt="Visitor exploring the Diwani alphabet on the installation screen" style="grid-column:span 4;grid-row:span 2;width:100%;height:100%;object-fit:cover;border-radius:20px;display:block">
+        <img src="uploads/iloveimg-converted (1)/IMG_8265.jpg" alt="The Thuluth alphabet with nuqta guides on screen" style="grid-column:span 4;grid-row:span 2;width:100%;height:100%;object-fit:cover;border-radius:20px;display:block">
+        <img src="uploads/WhatsApp Image 2026-09-18 at 17.42.01.jpeg" alt="Visitors watching the Al Mansub presentation at Shenkar" style="grid-column:span 2;grid-row:span 2;width:100%;height:100%;object-fit:cover;border-radius:20px;display:block">
+        <img src="uploads/iloveimg-converted (1)/IMG_8281.jpg" alt="Scrolling the history chapter at the installation" style="grid-column:span 3;grid-row:span 2;width:100%;height:100%;object-fit:cover;border-radius:20px;display:block">
+        <img src="uploads/iloveimg-converted (1)/IMG_8267.jpg" alt="Naskh script writing beneath the calligraphy wall" style="grid-column:span 3;grid-row:span 2;width:100%;height:100%;object-fit:cover;border-radius:20px;display:block">
+      </div>
+      
+    </div>
+
+  </div>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultView&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;case-study&quot;,&quot;options&quot;:[&quot;overview&quot;,&quot;case-study&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Views&quot;},&quot;autoplayVideos&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Videos&quot;}}">
+class Component extends DCLogic {
+  state = { view: 'case-study' };
+  features() {
+    // Add or remove feature blocks here — layout adapts automatically.
+    return [
+      { title: 'Home', text: 'Most people look at Arabic script and see decoration something beautiful, ornamental, to be admired rather than read.\n\nBut beneath that beauty is an exact engineering system: a method born in 10th-century Baghdad where every letter was measured against a single rhombic dot. \nALMANASUB is an interactive platform that reveals this hidden system, and traces how it traveled across the Islamic world mutating into distinct scripts in every culture it reached.', video: 'uploads/opening.mp4', poster: 'images/almansub-site.png' },
+      { title: 'History', text: 'The history page, built as scrollytelling, Scroll drives the narrative from the first revealed word, Iqra, (read) through the early script\'s development toward the proportional system.', video: 'https://res.cloudinary.com/a9hkhucx/video/upload/v1787838527/histoy_page_pce2ch.mp4', poster: 'images/almansub-site.png' },
+      { title: 'Map', text: 'An interactive map placing each script tradition in its geographic center, connecting form to place.', video: 'https://res.cloudinary.com/a9hkhucx/video/upload/v1787827848/map_lts5rr.mp4', poster: 'images/almansub-site.png' },
+      { title: 'The 7 scripts', text: 'The comparison screen, showing the same word written in all six classical scripts at once. A toggle reveals the coral nuqta  beneath each one, exposing the shared proportional system every script rests on the common skeleton behind their different forms.', video: 'https://res.cloudinary.com/a9hkhucx/video/upload/v1787835091/scripts_screen_kg8j67.mp4', poster: 'images/almansub-site.png' },
+      { title: 'Script page', text: 'An inner script page the detailed view of a single script. \nIt follows the same scrollytelling structure throughout: its origin, technical character, alphabet, letter anatomy, and real historical examples, letting the viewer study one script in depth.', video: 'https://res.cloudinary.com/a9hkhucx/video/upload/v1787827863/diwani_page_pukzaj.mp4', poster: 'images/almansub-site.png' },
+      { title: 'Letter anatomy', text: 'A close up animation of a single letter being written with the qalam, revealing its anatomy and proportions. \nIt shows the script not as a finished form but as a constructed one each stroke measured against the nuqta.', video: 'https://res.cloudinary.com/a9hkhucx/video/upload/v1787834353/alif_animation_b0htxy.mp4', poster: 'images/almansub-site.png' },
+    ];
+  }
+  syncView() {
+    const v = location.hash.replace('#', '') === 'overview' ? 'overview' : 'case-study';
+    if (v !== this.state.view) this.setState({ view: v });
+    if (!this._userHash) return;
+    const label = v === 'overview' ? 'Overview' : 'Case study';
+    const go = () => {
+      const s = document.querySelector('[data-screen-label$="— ' + label + '"]');
+      if (!s) return;
+      const y = s.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    };
+    setTimeout(go, 60);
+  }
+  renderVals() {
+    const view = this.state.view;
+    const on = 'var(--color-ink)';
+    const steps = ['Research', 'Structure', 'Design', 'Test', 'Refine'];
+    return {
+      processSteps: steps.map((label, i) => ({ num: '0' + (i + 1), label, hasLine: i < steps.length - 1 })),
+      features: this.features().map((f, i) => ({ ...f, num: '0' + (i + 1), dir: 'row-reverse', loop: f.title !== 'Home' })),
+      isOverview: view === 'overview',
+      isCase: view === 'case-study',
+      ovBg: view === 'overview' ? on : 'transparent',
+      ovInk: view === 'overview' ? '#fff' : 'var(--color-ink)',
+      csBg: view === 'case-study' ? on : 'transparent',
+      csInk: view === 'case-study' ? '#fff' : 'var(--color-ink)',
+    };
+  }
+  scanVideos() {
+    document.querySelectorAll('video[data-feature-video]').forEach((v) => {
+      const s = v.getAttribute('data-src'), p = v.getAttribute('data-poster');
+      if (s && v.getAttribute('src') !== s) v.setAttribute('src', s);
+      if (p && v.getAttribute('poster') !== p) v.setAttribute('poster', p);
+    });
+    if (!this._vObs) return;
+    document.querySelectorAll('video[data-feature-video]').forEach((v) => {
+      if (v.dataset.obs) return;
+      v.dataset.obs = '1';
+      v.muted = true;
+      this._vObs.observe(v);
+    });
+  }
+  componentDidMount() {
+    // back arrow turns white over dark panels
+    const back = document.querySelector('[data-back]');
+    this._onDark = () => {
+      if (!back) return;
+      const r = back.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+      let dark = false;
+      document.querySelectorAll('[data-dark]').forEach(el => { const b = el.getBoundingClientRect(); if (x >= b.left && x <= b.right && y >= b.top && y <= b.bottom) dark = true; });
+      back.style.color = dark ? '#fff' : '';
+    };
+    this._onDark();
+    window.addEventListener('scroll', this._onDark, { passive: true });
+    window.addEventListener('resize', this._onDark);
+    this._onHash = () => { this._userHash = true; this.syncView(); };
+    window.addEventListener('hashchange', this._onHash);
+    if (location.hash) this.syncView();
+    else if ((this.props.defaultView ?? 'case-study') === 'overview') this.setState({ view: 'overview' });
+    const allow = (this.props.autoplayVideos ?? true) && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this._vObs = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting && allow) e.target.play().catch(() => {});
+        else e.target.pause();
+      }
+    }, { threshold: 0.35 });
+    this.scanVideos();
+  }
+  componentDidUpdate() { this.scanVideos(); }
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this._onHash);
+    window.removeEventListener('scroll', this._onDark);
+    window.removeEventListener('resize', this._onDark);
+    if (this._vObs) this._vObs.disconnect();
+  }
+}
+</script>
+</body>
+</html>

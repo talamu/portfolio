@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Tala Mustafa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&amp;family=Roboto:wght@300;400&amp;family=Cormorant+Garamond:wght@400;500&amp;family=Poppins:wght@200;300;400&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-bg:#fafafa;
+  --color-ink:#0a0a0a;
+  --color-ink-soft:rgba(0,0,0,0.85);
+  --color-ink-dim:rgba(0,0,0,0.55);
+  --color-line:rgba(0,0,0,0.18);
+  --font-display:'Cormorant Garamond', Georgia, serif;
+  --font-body:'Poppins', 'Helvetica Neue', Helvetica, sans-serif;
+  --fs-display:clamp(34px, 1.8vw + 10px, 50px);
+  --fs-title:clamp(19px, 1.2vw, 31px);
+  --fs-body:clamp(16px, 1.1vw, 21px);
+  --fs-small:clamp(14px, 0.85vw, 21px);
+  --tracking-display:0.12em;
+  --space-1:8px; --space-2:16px; --space-3:24px; --space-4:40px;
+  --space-5:64px; --space-6:96px; --space-7:140px;
+  --space-gutter:clamp(24px, 5vw, 80px);
+  --fs-h2:clamp(44px, 3.2vw + 16px, 88px);
+  --radius-card:clamp(16px, 1.6vw, 40px);
+  --fs-h3:clamp(34px, 2.5vw, 64px);
+  --shadow-card:0 20px 45px rgba(90,90,90,0.22);
+}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--color-bg);color:var(--color-ink);font-family:var(--font-body);font-weight:300;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--color-ink);text-decoration:none}
+a:hover{color:var(--color-ink)}
+a:focus-visible,button:focus-visible{outline:1px solid var(--color-ink-dim);outline-offset:5px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</helmet>
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:2;max-width:1920px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px clamp(24px, 6vw, 152px);box-sizing:border-box;background:linear-gradient(to bottom, var(--color-bg) 60%, transparent)">
+  <a href="Home.dc.html" style="font-family:Rubik,Roboto,sans-serif;font-size:clamp(18px, 1.3vw, 32px);line-height:1;color:var(--color-ink)" style-hover="opacity:0.55"><span style="font-weight:700">Tala.</span><span style="font-weight:400">Mustafa</span></a>
+  <nav aria-label="Main" style="display:flex;gap:clamp(24px, 2vw, 50px)">
+    <a href="Work.dc.html" style="font-family:Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:300;font-size:clamp(17px, 1.3vw, 32px);line-height:1;color:var(--color-ink)" style-hover="opacity:0.55">Work</a>
+    <a href="Work.dc.html#about" style="font-family:Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:300;font-size:clamp(17px, 1.3vw, 32px);line-height:1;color:var(--color-ink)" style-hover="opacity:0.55">About</a>
+    <a href="Work.dc.html#contact" style="font-family:Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:300;font-size:clamp(17px, 1.3vw, 32px);line-height:1;color:var(--color-ink)" style-hover="opacity:0.55">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section data-screen-label="About — Intro" style="position:relative;min-height:100dvh;max-width:1920px;margin:0 auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:var(--space-7) var(--space-gutter)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 80px;width:100%;max-width:1600px;margin:0 auto">
+      <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+        <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">About</p>
+      </div>
+      <div style="display:flex;flex-direction:column;flex:2.6;min-width:min(360px,100%);max-width:44em;border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+        <div style="margin:0;font-size:var(--fs-body);font-weight:300;line-height:1.8;color:var(--color-ink-soft);text-wrap:pretty"><div>I am a Visual Communication designer, graduate from Shenkar College, specializing in digital product design.</div><div>I focus on creating clear, thoughtful, and visually engaging digital experiences that combine UI/UX, branding, and visual storytelling.</div><div>My work is driven by research, clarity, and a strong attention to detail, with an interest in how design shapes user behavior and emotional connection.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="About — Skills, Tools, Languages" style="min-height:100dvh;max-width:1920px;margin:0 auto;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:var(--space-7) var(--space-gutter)">
+    <div data-reveal="" style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 80px;width:100%;max-width:1600px;margin:0 auto">
+    <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+      <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">Skills</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:var(--space-5) var(--space-6);flex:2.6;min-width:min(360px,100%)">
+      <div style="display:flex;flex-direction:column;border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+        <h2 style="margin:0;font-family:var(--font-display);font-weight:400;font-size:var(--fs-title);letter-spacing:var(--tracking-display);text-transform:uppercase">What I do</h2>
+        <ul style="margin:var(--space-4) 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--space-2);font-size:var(--fs-body);font-weight:300;line-height:1.5;color:var(--color-ink-soft)">
+          <li>UI/UX design</li>
+          <li>Interaction design</li>
+          <li>Design research</li>
+          <li>Information architecture</li>
+          <li>Branding &amp; visual identity</li>
+          <li>Typography &amp; bilingual layout</li>
+          <li>Prototyping</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+        <h2 style="margin:0;font-family:var(--font-display);font-weight:400;font-size:var(--fs-title);letter-spacing:var(--tracking-display);text-transform:uppercase">Tools</h2>
+        <ul style="margin:var(--space-4) 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--space-2);font-size:var(--fs-body);font-weight:300;line-height:1.5;color:var(--color-ink-soft)">
+          <li>Figma</li>
+          <li>Adobe Illustrator</li>
+          <li>Adobe Photoshop</li>
+        </ul>
+        <h2 style="margin:var(--space-5) 0 0;font-family:var(--font-display);font-weight:400;font-size:var(--fs-title);letter-spacing:var(--tracking-display);text-transform:uppercase">AI Tools</h2>
+        <ul style="margin:var(--space-4) 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--space-2);font-size:var(--fs-body);font-weight:300;line-height:1.5;color:var(--color-ink-soft)">
+          <li>Claude</li>
+          <li>Gemini</li>
+          <li>ChatGPT</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+        <h2 style="margin:0;font-family:var(--font-display);font-weight:400;font-size:var(--fs-title);letter-spacing:var(--tracking-display);text-transform:uppercase">Languages</h2>
+        <ul style="margin:var(--space-4) 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--space-2);font-size:var(--fs-body);font-weight:300;line-height:1.5;color:var(--color-ink-soft)">
+          <li style="display:flex;justify-content:space-between;gap:var(--space-3)">Arabic <span style="color:var(--color-ink-dim)">Native</span></li>
+          <li style="display:flex;justify-content:space-between;gap:var(--space-3)">Hebrew <span style="color:var(--color-ink-dim)">Fluent</span></li>
+          <li style="display:flex;justify-content:space-between;gap:var(--space-3)">English <span style="color:var(--color-ink-dim)">Fluent</span></li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section id="contact" data-screen-label="About — Contact" style="max-width:1920px;margin:0 auto;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:var(--space-6) var(--space-gutter) var(--space-7)">
+    <div data-reveal="" style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 80px;width:100%;max-width:1600px;margin:0 auto">
+      <div style="flex:1;min-width:min(240px,100%);border-top:1px solid var(--color-line);padding-top:var(--space-3)">
+        <p style="margin:0;font-size:var(--fs-small);letter-spacing:0.28em;text-transform:uppercase;color:var(--color-ink-dim)">Contact</p>
+      </div>
+      <div style="display: flex; flex-direction: row; align-items: flex-start; gap: 72px; flex: 2.6; min-width: min(360px,100%); border-top: 1px solid var(--color-line); padding-top: var(--space-3)">
+        
+        <a href="mailto:tala@email.com" style="font-size:var(--fs-body);font-weight:300;color:var(--color-ink-dim);border-bottom:1px solid var(--color-line);padding-bottom:4px" style-hover="color:var(--color-ink);border-bottom:1px solid var(--color-ink)">talamustafa176@gmail.com</a><nav aria-label="Social" style="display:flex;gap:var(--space-5)">
+          <a href="#" style="font-size:var(--fs-body);color:var(--color-ink);opacity:0.92;padding:6px 2px" style-hover="opacity:0.55">LinkedIn</a>
+          <a href="#" style="font-size:var(--fs-body);color:var(--color-ink);opacity:0.92;padding:6px 2px" style-hover="opacity:0.55">Behance</a>
+          <a href="#" style="font-size:var(--fs-body);color:var(--color-ink);opacity:0.92;padding:6px 2px" style-hover="opacity:0.55">Instagram</a>
+        </nav>
+        
+      </div>
+    </div>
+  </section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;revealAnimations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    if ((this.props.revealAnimations ?? true) === false) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const els = document.querySelectorAll('[data-reveal]');
+    const vh = window.innerHeight;
+    const obs = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          obs.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.15 });
+    els.forEach((el) => {
+      if (el.getBoundingClientRect().top < vh * 0.9) return;
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      obs.observe(el);
+    });
+    this._obs = obs;
+  }
+  componentWillUnmount() {
+    if (this._obs) this._obs.disconnect();
+  }
+}
+</script>
+</body>
+</html>
