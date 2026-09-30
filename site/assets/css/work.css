@@ -192,9 +192,13 @@
   .screens{
     justify-content:flex-start;gap:var(--space-3);
     overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-    margin:-12px calc(-1 * var(--space-gutter)) -28px;padding:12px var(--space-gutter) 28px;scroll-padding:0 var(--space-gutter);
+    /* the scroll box must hold the whole card shadow (0 20px 45px) or it clips to a hard edge;
+       the negative margins cancel that room out so the gap to the title stays 24px */
+    margin:-32px calc(-1 * var(--space-gutter)) -72px;padding:32px var(--space-gutter) 72px;scroll-padding:0 var(--space-gutter);
     width:auto;max-width:none;
   }
   .screens::-webkit-scrollbar{display:none}
+  /* text block paints above the carousel's (transparent) shadow room */
+  .project-text{position:relative}
   .screens img{flex:0 0 auto;width:min(56vw, 260px);border-radius:28px;scroll-snap-align:center}
 }
