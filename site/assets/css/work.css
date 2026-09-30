@@ -81,9 +81,12 @@
   display:flex;align-items:center;
   padding:32px var(--space-gutter);
 }
-/* desktop: 60px above and below = 120px between projects */
+/* desktop: 60px above and below = 120px between projects; tablet: 51px = 102px */
 @media (min-width:1200px){
   .project{padding-top:60px;padding-bottom:60px}
+}
+@media (min-width:768px) and (max-width:1199px){
+  .project{padding-top:51px;padding-bottom:51px}
 }
 /* keep the original room between the "Selected projects" title and the first project */
 .projects-head + .project{padding-top:var(--space-6)}
