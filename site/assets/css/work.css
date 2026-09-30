@@ -75,11 +75,14 @@
 }
 .projects-head .section-label span:last-child{color:var(--color-ink-dim)}
 
+/* 32px above and below each project = 64px between one project and the next */
 .project{
   max-width:var(--max-page);margin:0 auto;
   display:flex;align-items:center;
-  padding:var(--space-6) var(--space-gutter);
+  padding:32px var(--space-gutter);
 }
+/* keep the original room between the "Selected projects" title and the first project */
+.projects-head + .project{padding-top:var(--space-6)}
 .project-grid{
   display:grid;grid-template-columns:repeat(auto-fit, minmax(min(480px,100%), 1fr));
   align-items:center;gap:var(--space-5);width:100%;color:inherit;
@@ -183,7 +186,7 @@
   .intro-title{font-size:clamp(26px, 8vw, 36px)}
   .intro-body{font-size:clamp(15px, 4.4vw, 20px)}
   .wordmark{font-size:clamp(48px, 15vw, 88px)}
-  .project-grid{margin-top:48px;gap:24px}
+  .project-grid{gap:24px}
 
   /* phone: horizontal swipe carousel, one card per swipe, page gutter as bleed */
   .screens{
