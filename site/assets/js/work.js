@@ -48,6 +48,11 @@
   if (location.hash) {
     requestAnimationFrame(jump);
     window.addEventListener('load', jump, { once: true });
+  } else {
+    // fresh open: always start at the top (browsers otherwise restore the last scroll position)
+    try { history.scrollRestoration = 'manual'; } catch (_) { /* unsupported */ }
+    window.scrollTo(0, 0);
+    setTimeout(() => { if (!location.hash) window.scrollTo(0, 0); }, 50);
   }
 
   // ---------- Reveal on scroll ----------

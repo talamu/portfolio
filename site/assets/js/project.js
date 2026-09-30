@@ -70,13 +70,26 @@
   const allowPlay = !reduceMotion;
   const tryPlay = (v) => {
     // play-once videos hold their last frame instead of restarting when scrolled back to
-    if (allowPlay && v.dataset.inView && v.dataset.loaded && !(v.ended && !v.loop)) v.play().catch(() => {});
+    if (!allowPlay || !v.dataset.inView || !v.dataset.loaded || (v.ended && !v.loop)) return;
+    v.play().catch(() => {});
+    // not buffered yet: try again as soon as it can play, if it's still on screen
+    if (v.readyState < 3 && !v.dataset.retry) {
+      v.dataset.retry = '1';
+      v.addEventListener('canplay', () => { if (v.dataset.inView) v.play().catch(() => {}); }, { once: true });
+    }
   };
 
   const prepare = (v) => {
     if (v.dataset.loaded) return;
     v.dataset.loaded = '1';
+    // iOS: inline playback needs these attributes, and muted must be a real property for autoplay
     v.muted = true;
+    v.defaultMuted = true;
+    v.setAttribute('playsinline', '');
+    v.setAttribute('webkit-playsinline', '');
+    v.setAttribute('disablepictureinpicture', '');
+    v.removeAttribute('controls');
+    v.preload = 'metadata';
     v.addEventListener('error', () => { v.style.display = 'none'; }, { once: true });
     if (v.dataset.bgRemoval) v.crossOrigin = 'anonymous';
     if (v.dataset.poster) v.poster = v.dataset.poster;
@@ -222,6 +235,37 @@
     else v.addEventListener('loadeddata', measure, { once: true });
     // slow network: show the video unmasked rather than nothing
     setTimeout(() => { if (!masked) reveal(); }, 8000);
+  }
+
+  // ---------- Phone gallery: two columns balanced by photo height ----------
+  const gallery = document.querySelector('[data-gallery]');
+  if (gallery) {
+    const photos = [...gallery.querySelectorAll('img')];
+    const phone = window.matchMedia('(max-width: 767px)');
+    const layout = () => {
+      if (!phone.matches) {
+        if (gallery.dataset.balanced) { delete gallery.dataset.balanced; gallery.replaceChildren(...photos); }
+        return;
+      }
+      // greedy: each photo goes into the shorter column, using aspect ratio as its height at equal width
+      const cols = [[], []], height = [0, 0];
+      const ratio = (img) => (img.naturalWidth && img.naturalHeight) ? img.naturalHeight / img.naturalWidth : 0.75;
+      photos.forEach((img) => {
+        const k = height[0] <= height[1] ? 0 : 1;
+        cols[k].push(img);
+        height[k] += ratio(img) + 0.04;
+      });
+      gallery.replaceChildren(...cols.map((col) => {
+        const div = document.createElement('div');
+        div.className = 'gallery-col';
+        div.append(...col);
+        return div;
+      }));
+      gallery.dataset.balanced = '1';
+    };
+    layout();
+    phone.addEventListener('change', layout);
+    photos.forEach((img) => { if (!img.complete) img.addEventListener('load', layout, { once: true }); });
   }
 
   // ---------- Init ----------

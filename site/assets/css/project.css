@@ -290,8 +290,70 @@
 .span-3x3{grid-column:span 3;grid-row:span 3}
 .span-4x2{grid-column:span 4;grid-row:span 2}
 
+/* phone-only "view the live site" link inside the Al Mansub header */
+.live-inline{display:none}
+
+/* ---------- Tablet (Al Mansub: overview rows stack, video above text) ---------- */
+@media (max-width:1199px){
+  .theme-almansub .feature{min-height:100svh;flex-direction:column;justify-content:center;background:#FCF5E3}
+  .theme-almansub .feature-media{flex:0 0 auto;padding:32px var(--space-gutter)}
+  .theme-almansub .video-frame{width:100%;max-width:100%}
+  .theme-almansub .video-frame video{width:100%;height:auto;max-height:none}
+  .theme-almansub .feature-text{flex:0 0 auto;justify-content:flex-start;padding:40px var(--space-gutter) 56px;background:#FCF5E3}
+}
+
 /* ---------- Phones ---------- */
 @media (max-width:767px){
+  /* project header: stacked, compact type */
+  .project-hero,
+  .theme-almansub .project-hero,
+  .theme-coffetrack .project-hero{min-height:0;padding:calc(64px + 24px) var(--space-gutter) 80px;justify-content:flex-start;gap:36px}
+  .theme-localish .project-hero{padding-left:0;padding-right:0}
+  .hero-inner,.theme-almansub .hero-inner{top:0;gap:40px}
   .hero-intro{max-width:100%}
-  .theme-coffetrack .hero-icon{width:clamp(64px, 22vw, 96px);height:auto;aspect-ratio:159 / 135}
+  .hero-desc,.theme-almansub .hero-desc{width:auto;max-width:100%;font-size:14px;line-height:1.55}
+  .meta{flex-direction:column;gap:24px;padding-left:16px;width:100%}
+  .meta dt{font-size:14px;letter-spacing:0.3em}
+  .meta dd{font-size:14px}
+
+  /* Al Mansub: logo above the title */
+  .theme-almansub .hero-title-row{flex-direction:column-reverse;align-items:flex-start;gap:40px;top:0}
+  .theme-almansub .hero-logo{margin-left:0;max-width:100%;width:min(52vw, 220px);height:auto;align-self:center}
+  .theme-almansub .hero-title{font-size:16px}
+  /* Localish: smaller wordmark */
+  .theme-localish .hero-title img{width:min(60vw, 260px)}
+  /* CoffeeTrack: icon and name stay side by side */
+  .theme-coffetrack .hero-title-row{flex-direction:row;align-items:center;gap:16px}
+  .theme-coffetrack .hero-icon{width:72px;height:auto;align-self:center}
+  .theme-coffetrack .hero-title{font-size:32px}
+
+  /* view bar: full-width segmented control at the bottom */
+  .view-bar{left:var(--space-gutter);right:var(--space-gutter);bottom:16px;flex-direction:column;align-items:stretch;gap:12px;z-index:2}
+  .view-toggle{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,0.12)}
+  .view-toggle a{display:flex;align-items:center;justify-content:center;min-height:36px;padding:6px 16px;border-radius:10px;text-transform:none;letter-spacing:0;font-size:14px}
+  .view-bar .pill-link{display:none}
+  .live-inline{
+    display:flex;align-items:center;justify-content:center;width:100%;min-height:36px;padding:6px 16px;
+    border:1px solid var(--color-ink);border-radius:14px;font-size:14px;color:var(--color-ink);background:var(--color-bg);
+  }
+  .live-inline:hover{background:var(--color-ink);color:#fff}
+  .project-main{padding-bottom:calc(var(--space-6) + 70px)}
+
+  /* overview rows: video above text, each filling the screen */
+  .feature{min-height:100svh;flex-direction:column;justify-content:center}
+  .feature-media,.theme-almansub .feature-media{flex:1 1 100%;padding:24px var(--space-gutter)}
+  .feature-text,.theme-almansub .feature-text{flex:1 1 100%;justify-content:flex-start;padding:32px var(--space-gutter) 48px}
+  .feature-body{font-size:14px;line-height:1.7}
+  .theme-almansub .video-frame{width:100%;max-width:100%}
+  .theme-almansub .video-frame video{width:100%;height:auto;max-height:none}
+  .theme-localish .phone-box{height:auto;width:min(72%, 300px);max-width:100%;margin:0 auto}
+  .theme-localish .phone-box--wide{aspect-ratio:9 / 19 !important}
+  .theme-localish .phone-box--wide video{object-fit:cover !important}
+  .theme-coffetrack .phone-box{height:auto;width:min(62%, 260px);max-width:100%;margin:0 auto}
+  .theme-localish .phone-box--store,.theme-coffetrack .phone-box--store{width:100%;margin:0}
+
+  /* final presentation: two balanced columns (JS fills .gallery-col) */
+  .gallery{display:flex;gap:12px;align-items:flex-start}
+  .gallery-col{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px}
+  .gallery img{width:100%;height:auto;object-fit:initial;border-radius:14px}
 }
