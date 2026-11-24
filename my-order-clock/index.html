@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Order Clock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: one 24-hour dial fills the screen. Angle is the time of day, distance from the centre is the date, so four years of orders grow outward like tree rings. Single dark theme by choice: the dial is a night clock. */
+:root{
+  --bg:#16141b; --ring:#2d2a36; --text:#f1eee8; --text2:#b9b4c2; --muted:#7d788a; --hand:#f1eee8;
+  --c-burger:#3987e5; --c-sushi:#d95926; --c-pizza:#199e70; --c-market:#c98500; --c-sweet:#d55181; --c-hummus:#0ca30c; --c-chicken:#9085e9; --c-seafood:#e66767; --c-salad:#a9c938; --c-potato:#b58a62; --c-pharm:#ebe7df; --c-other:#8f8e86;
+  --font:"Readex Pro","Segoe UI",Tahoma,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.55}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.app{min-height:100%;max-width:1280px;margin:0 auto;padding:20px 24px;display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:8px 32px;align-items:center}
+.stage{position:relative;width:min(100%,max(340px,calc(100vh - 40px)));aspect-ratio:1;justify-self:center}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.core{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;text-align:center}
+.core .mon{font-size:clamp(11px,1.7vmin,15px);color:var(--text2)}
+.core .yr{font-size:clamp(22px,5vmin,44px);font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.core .sum{font-size:clamp(11px,1.7vmin,15px);color:var(--text2);font-variant-numeric:tabular-nums;direction:ltr}
+.side{display:flex;flex-direction:column;gap:16px;min-width:0}
+h1{font-size:30px;font-weight:600;line-height:1.2;margin:0;text-wrap:balance}
+.lede{margin:8px 0 0;color:var(--text2);font-weight:300}
+.now{border-top:1px solid var(--ring);border-bottom:1px solid var(--ring);padding:12px 0;min-height:86px}
+.now .k{font-size:12px;color:var(--muted)}
+.now .nm{font-size:18px;font-weight:500;display:flex;align-items:center;gap:8px;overflow-wrap:anywhere}
+.now .meta{color:var(--text2);font-variant-numeric:tabular-nums;font-size:14px}
+.sw{width:10px;height:10px;border-radius:50%;flex:none;display:inline-block}
+.legend{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.legend li.all,.legend button.cat{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;font-size:14px;width:100%}
+.legend li.all{border-top:1px solid var(--ring);padding:7px 8px 0;color:var(--text2)}
+.legend button.cat{background:none;border:1px solid transparent;border-radius:8px;padding:4px 8px;text-align:start;cursor:pointer}
+.legend button.cat:hover{border-color:var(--ring)}
+.legend button.cat[aria-pressed="false"]{color:var(--muted)}
+.legend button.cat[aria-pressed="false"] .sw{opacity:.2}
+.ctl{display:flex;flex-direction:column;gap:14px}
+.grp{display:flex;flex-direction:column;gap:6px}
+.lab{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.link{background:none;border:0;padding:0;color:var(--text2);text-decoration:underline;cursor:pointer;font-size:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--ring);background:transparent;border-radius:999px;padding:3px 12px;cursor:pointer;font-size:14px;color:var(--text2)}
+.chip:hover{border-color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.legend .n{color:var(--text2);font-variant-numeric:tabular-nums}
+.key{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--text2);font-weight:300;margin:0}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.btn{border:1px solid var(--muted);background:transparent;border-radius:999px;padding:5px 16px;cursor:pointer}
+.btn:hover{border-color:var(--text)}
+.note{font-size:12px;color:var(--muted);margin:0;font-weight:300}
+.tip{position:fixed;z-index:9;pointer-events:none;background:var(--text);color:var(--bg);border-radius:8px;padding:6px 10px;font-size:13px;line-height:1.45;max-width:230px}
+.tip b{display:block;font-weight:600}
+.tip[hidden]{display:none}
+/* tall screen, 1080 x 1920: title, then the dial across the full width, then the panel in two columns */
+@media (min-width:861px) and (orientation:portrait){
+  body{font-size:18px}
+  .app{max-width:1080px;padding:30px 36px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto auto auto 1fr;
+    grid-template-areas:"head head" "stage stage" "now ctl" "key ctl" "btns ctl" "note ctl";gap:18px 44px;align-items:start}
+  .side{display:contents}
+  .head{grid-area:head}.stage{grid-area:stage}.now{grid-area:now}.ctl{grid-area:ctl}.key{grid-area:key}.btns{grid-area:btns}.note{grid-area:note}
+  h1{font-size:46px}.lede{font-size:20px;margin-top:6px}
+  .now .k{font-size:14px}.now .nm{font-size:24px}.now .meta{font-size:17px}
+  .legend li.all,.legend button.cat{font-size:17px}.chip{font-size:16px;padding:5px 16px}.lab,.link{font-size:14px}
+  .key{font-size:15px;gap:6px}.btn{padding:8px 22px}.note{font-size:13px}
+  .legend{display:grid;grid-template-columns:1fr 1fr;column-gap:20px}.legend li.all{grid-column:1/-1}
+  .ctl{display:grid;grid-template-columns:auto 1fr;gap:14px 28px}.ctl .grp:nth-child(1),.ctl .grp:nth-child(2),.ctl .grp:nth-child(5){grid-column:1/-1}
+  .stage{width:min(100%,max(600px,56vh))}
+}
+/* wide screen, 1920 x 1080: a larger dial with the panel beside it */
+@media (min-width:1500px) and (orientation:landscape){
+  .app{max-width:1720px;grid-template-columns:minmax(0,1fr) 450px;gap:8px 56px;padding:16px 28px}
+  .side{gap:12px}h1{font-size:34px}.now{min-height:0;padding:10px 0}.key{gap:2px}
+  .stage{width:min(100%,max(600px,calc(100vh - 32px)))}
+  .legend{display:grid;grid-template-columns:1fr 1fr;column-gap:20px}.legend li.all{grid-column:1/-1}
+  .ctl{display:grid;grid-template-columns:auto 1fr;gap:14px 28px}.ctl .grp:nth-child(1),.ctl .grp:nth-child(2),.ctl .grp:nth-child(5){grid-column:1/-1}
+}
+@media (max-width:860px){
+  .app{grid-template-columns:minmax(0,1fr);padding:16px;gap:14px;align-items:start}
+  .side{order:2;gap:16px}
+  .head{order:0}
+  .stage{width:100%}
+  h1{font-size:25px}
+  .now{min-height:0}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="stage" id="stage">
+    <canvas id="cv" role="img" aria-label="A 24-hour dial where each order is a dot placed by its time, date and amount"></canvas>
+    <div class="core"><span class="mon" id="mon"></span><span class="yr" id="yr"></span><span class="sum" id="sum"></span></div>
+  </div>
+  <aside class="side">
+    <div class="head">
+      <h1>My Order Clock</h1>
+      <p class="lede">Four years of food-delivery orders from Wolt and Haat on one dial. Each order appears as a dot, on its own.</p>
+    </div>
+    <div class="now" aria-live="off">
+      <div class="k">Latest order</div>
+      <div class="nm"><span class="sw" id="nowSw"></span><span id="nowNm"></span></div>
+      <div class="meta" id="nowMeta"></div>
+    </div>
+    <div class="ctl">
+      <div class="grp"><span class="lab">Year</span><div class="chips" id="years"></div></div>
+      <div class="grp"><span class="lab">Food type <button class="link" id="allCats" type="button">All</button></span><ul class="legend" id="legend"></ul></div>
+      <div class="grp"><span class="lab">App</span><div class="chips" id="apps"></div></div>
+      <div class="grp"><span class="lab">Speed</span><div class="chips" id="speed"></div></div>
+      <div class="grp"><span class="lab">Show</span><div class="chips" id="misc"></div></div>
+    </div>
+    <p class="key">
+      <span>Angle: the hour of the day</span>
+      <span>Distance from the centre: the date, 2022 outward</span>
+      <span>Size: the amount in shekels</span>
+      <span>Empty ring: an unfinished attempt</span>
+      <span>Pick a year and the rings become its months</span>
+      <span>Sound: each food type has its own note, big orders play lower, an unfinished attempt is a dry tick</span>
+    </p>
+    <div class="btns">
+      <button class="btn" id="toggle" type="button">Pause</button>
+      <button class="btn" id="again" type="button">Restart</button>
+      <button class="btn" id="sound" type="button" aria-pressed="false">Sound: off</button>
+    </div>
+    <p class="note">Data transcribed from screenshots of the Wolt and Haat order histories. Food type is read from the venue name or logo.</p>
+  </aside>
+</div>
+<div class="tip" id="tip" hidden></div>
+<script>
+(function(){
+const RAW=`2022-12-31 20:02|97.00|Burger Station|Ramat Gan
+2023-04-23 19:13|106.00|Japanika Kosher|Bursa Ramat Gan
+2023-06-18 21:27|117.00|Wok Sushi 9|Yigal Alon
+2023-07-17 18:00|81.00|Sai Sushi Bar|Ramat Gan
+2023-08-23 16:35|291.00|Oban Koban|
+2024-01-10 19:24|91.00|Paris Texas Burger|Givatayim
+2024-02-27 19:38|199.00|Burger Station|Ramat Gan
+2024-03-05 20:34|81.00|Sai Sushi Bar|Ramat Gan
+2024-03-06 18:30|91.00|Paris Texas Burger|Givatayim
+2024-05-09 12:18|67.00|Domino's Pizza|Ramat Gan
+2024-06-03 20:26|164.00|MeatBar Burger|Ibn Gvirol
+2024-06-20 21:16|94.00|Mr.Potato|Nazareth
+2024-06-24 21:15|-|Superfood Salad Bar|
+2024-06-24 21:15|78.00|Superfood Salad Bar|
+2024-07-09 15:24|69.80|Wolt Market|Bursa
+2024-08-17 21:20|80.30|am:pm|Kehilat Saloniki
+2024-08-20 17:04|94.00|MeatBar Burger|Ibn Gvirol
+2024-08-26 21:55|81.00|Sai Sushi Bar|Ramat Gan
+2024-08-27 20:38|70.00|Black Store|
+2024-09-11 13:59|83.00|Chikinn||h
+2024-10-17 17:29|76.00|Richard Burger||h
+2024-11-03 20:51|-|Hummus Falafel Halim|
+2024-11-03 21:12|66.00|Paris Texas Burger|Givatayim
+2024-11-17 16:48|68.00|Hummus Falafel Halim|
+2024-11-26 17:02|88.00|MeatBar Burger|Ibn Gvirol
+2024-12-03 10:33|94.20|Wolt Market|Bursa
+2024-12-04 18:46|119.00|Sai Sushi Bar|Ramat Gan
+2024-12-12 15:28|100.50|Wolt Market|Bursa
+2024-12-13 13:14|179.00|Jeraisy|Galilee St|h
+2025-01-11 20:52|92.50|Wolt Market|Bursa
+2025-01-21 19:37|131.90|Roladin|Borochov Givatayim
+2025-01-29 00:04|168.90|HaMosad|
+2025-01-30 23:14|156.90|MeatBar Burger|Ibn Gvirol
+2025-02-06 14:52|187.90|GDB Burger|Ibn Gabirol
+2025-02-10 21:38|68.50|Wolt Market|Bursa
+2025-02-15 22:58|93.67|Wolt Market|Bursa
+2025-02-19 18:41|215.90|Paris Texas Burger|Givatayim
+2025-02-25 00:39|76.00|Yellow Mini Market|Aluf Sade
+2025-03-02 17:27|87.70|Sai Sushi Bar|Ramat Gan
+2025-03-11 18:48|177.90|Black Store|
+2025-03-19 20:02|24.75|Roladin|Borochov Givatayim
+2025-03-26 17:19|-|Paris Texas Burger|Givatayim
+2025-03-26 17:21|-|Paris Texas Burger|Givatayim
+2025-03-26 17:21|357.90|Paris Texas Burger|Givatayim
+2025-04-17 14:37|213.00|Zachi|Nazareth|h
+2025-04-18 16:28|158.60|Pizza Papa John's|Nof HaGalil|h
+2025-04-25 19:07|-|Yellow Market|Hayarkon
+2025-04-25 19:08|88.75|Yellow Market|Hayarkon
+2025-04-27 13:16|87.70|Sai Sushi Bar|Ramat Gan
+2025-05-06 20:02|71.00|Black Store|
+2025-05-07 18:33|86.21|Wolt Market|Bursa
+2025-05-07 18:40|87.15|Metuka|Ramat Gan
+2025-05-23 21:06|310.00|Adam's Smoke House||h
+2025-05-30 12:47|168.00|Jeraisy|Salesian|h
+2025-05-30 19:04|189.00|Shrimso||h
+2025-06-09 14:59|161.90|Vitrina Burgers|Lilienblum
+2025-06-11 13:57|152.90|Sai Sushi Bar|Ramat Gan
+2025-06-16 13:27|176.00|Jeraisy|Salesian|h
+2025-06-23 18:41|210.40|Machsanei HaShuk|Nof HaGalil
+2025-06-28 22:24|92.43|am:pm|Arlozorov Ramat Gan
+2025-07-01 09:38|86.97|Wolt Market|Bursa
+2025-07-01 16:58|93.80|MeatBar Burger|Ibn Gvirol
+2025-07-02 21:13|164.90|Wolt Market|Bursa
+2025-07-13 19:26|106.30|Silly Kid|Neot Afeka
+2025-07-14 20:11|222.90|Flakes & Burgers by IWO'S|
+2025-07-18 19:42|199.00|Wasabi Sushi||h
+2025-07-23 18:01|136.90|La Cucina|
+2025-07-26 21:13|141.10|Pizza Papa John's|Nof Hagalil
+2025-07-28 10:24|-|Machsany Lahav|Nof HaGalil
+2025-07-28 10:25|87.28|Machsany Lahav|Nof HaGalil
+2025-07-29 19:29|185.90|Paris Texas Burger|Givatayim
+2025-08-01 21:14|122.00|Mary||h
+2025-08-07 16:42|128.90|Hummus Ha'kikar|
+2025-08-07 22:58|-|Wolt Market|Bursa
+2025-08-07 22:59|-|Wolt Market|Bursa
+2025-08-07 23:03|-|Wolt Market|Bursa
+2025-08-07 23:05|119.60|Wolt Market|Bursa
+2025-08-07 23:20|65.10|R PIZZA|
+2025-08-27 15:30|418.00|BBB|Nof HaGalil|h
+2025-09-07 16:33|90.85|Sai Sushi Bar|Ramat Gan
+2025-09-24 21:35|161.00|Basel Burger|Nazareth|h
+2025-09-28 13:10|84.36|Machsany Lahav|Nof HaGalil
+2025-10-16 21:10|123.00|Il Mulino||h
+2025-10-22 14:54|104.20|GDB Burger|Maoz Aviv
+2025-10-26 19:26|80.02|am:pm|Arlozorov Ramat Gan
+2025-10-29 19:11|71.00|Black Store|Ramat Aviv
+2025-11-04 19:34|67.00|Pasta Basta|Ramat Gan - Givatayim
+2025-11-13 16:45|79.30|Paris Texas Burger|Givatayim
+2025-11-29 20:39|311.90|Grinberg Burger|North TLV
+2025-11-29 22:42|245.40|am:pm|Arlozorov Ramat Gan
+2025-12-22 10:18|105.17|Be Pharm|Bloch Givatayim
+2025-12-30 14:37|78.23|am:pm|Arlozorov Ramat Gan
+2026-01-04 16:05|-|Roladin|Bursa
+2026-01-04 16:05|77.60|Roladin|Bursa
+2026-01-04 16:11|21.00|am:pm|Arlozorov Ramat Gan
+2026-01-04 20:43|186.90|Bira Nekuda|Givatayim
+2026-01-26 17:31|133.90|Sushi Time|Bnei Brak
+2026-01-26 17:42|79.00|Choose Your Cookies|Dizengoff
+2026-01-29 15:12|254.00|GOAT Burger||h
+2026-01-30 21:04|72.85|Black Store|Ramat Aviv
+2026-02-01 21:08|88.75|Roladin|Borochov Givatayim
+2026-02-05 15:30|198.90|Paris Texas Burger|Givatayim
+2026-04-02 11:06|153.00|Jeraisy|Salesian|h
+2026-04-04 19:48|216.80|Pizza Hut|Nof HaGalil|h
+2026-04-12 20:32|148.90|Choose Your Cookies|Dizengoff
+2026-04-15 19:25|135.90|Pizza Story|Ramat Gan
+2026-04-18 20:22|149.00|I Sushi||h
+2026-04-30 20:43|142.90|Choose Your Cookies|Dizengoff
+2026-05-01 12:56|73.00|Abulafia|Menachem Begin
+2026-05-07 21:29|190.90|Parmesan|
+2026-05-13 15:11|111.30|Pastito|Givatayim
+2026-05-13 19:21|90.75|Roladin|Yehuda HaMakabi
+2026-05-18 21:12|131.50|Black Store|Ramat Aviv
+2026-05-19 21:34|95.90|Fresh The Market|Ramat Gan
+2026-05-21 00:00|113.75|Andre Ice Cream|Ramat Gan
+2026-05-21 20:59|204.90|Night Cookie|Tel Aviv
+2026-05-24 21:54|179.90|Tonys Pizza|Ramat Gan
+2026-05-25 00:12|0.00|Pizza 1+1|
+2026-05-25 19:33|117.80|Choose Your Cookies|Dizengoff
+2026-05-27 19:49|231.90|Olio Italian|Bograshov
+2026-05-30 22:50|153.90|Mary|Nazareth
+2026-06-14 20:32|193.90|Black Store|Rothschild
+2026-06-21 10:31|139.00|Jeraisy|Salesian|h
+2026-06-27 20:57|140.90|Choose Your Cookies|Dizengoff
+2026-07-01 22:49|-|Sai Sushi Bar|Ramat Gan
+2026-07-01 22:50|139.90|Sai Sushi Bar|Ramat Gan
+2026-07-07 11:50|91.70|Yellow Market|Hayarkon
+2026-07-12 23:16|92.65|Alibi|Sushi bar
+2026-07-13 15:59|159.90|Hummus Ful Abu Daud|
+2026-07-14 23:45|-|Pizza Karina|
+2026-07-16 11:03|89.28|Super Yuda|Yehuda HaMacabi
+2026-07-17 22:17|105.55|Papi Pizza|Giv'atayim
+2026-07-17 22:19|66.15|Papi Pasta|Giv'atayim
+2026-07-18 20:29|199.90|Soft Cookies|Sarona Market
+2026-07-22 14:11|130.07|Wolt Market|Bialik
+2026-07-23 18:45|172.90|Tiras|Azrieli Mall
+2026-07-25 12:28|171.90|Abulafia|Allenby
+2026-07-26 17:26|87.50|Diana Express|
+2026-07-31 00:35|125.85|Extreme Pizza|Tel Aviv
+2026-07-31 18:04|148.90|Bobby From Nowhere|
+2026-08-06 19:00|86.34|Machsanei HaShuk|Nof HaGalil
+2026-08-13 19:31|-|Machsany Lahav|Nof HaGalil
+2026-08-13 19:31|-|Machsany Lahav|Nof HaGalil
+2026-08-13 19:34|204.00|Machsany Lahav|Nof HaGalil
+2026-08-18 00:29|107.45|Paris Texas Burger|Givatayim
+2026-09-19 20:26|116.00|Mr.Potato|Al-Ain|h
+2026-09-20 11:18|148.00|Jeraisy|Salesian|h
+2026-09-24 17:04|226.00|Mary||h
+2026-09-27 20:33|108.00|Aldo|Nazareth|h
+2026-10-14 10:04|-|Machsanei HaShuk|Nof HaGalil
+2026-10-14 10:04|58.60|Machsanei HaShuk|Nof HaGalil
+2026-10-22 11:01|116.58|Machsany Lahav|Nof HaGalil
+2026-10-24 17:06|178.00|Atza Sushi Bar|Nof HaGalil|h
+2026-11-09 19:20|147.90|Choose Your Cookies|Dizengoff
+2026-11-16 20:48|-|Shake House|
+2026-11-16 20:49|-|Shake House|
+2026-11-16 20:51|192.90|Shake House|
+2026-11-23 15:54|155.90|Four Monkeys|`;
+const CATS=[
+  {id:'burger',ar:'Burgers',re:/burger|^bbb$|hamosad|adam's smoke house|zachi|bobby from nowhere/i},
+  {id:'sushi',ar:'Sushi',re:/sushi|japanika|oban koban/i},
+  {id:'pizza',ar:'Pizza & pasta',re:/pizza|pasta|italian|mulino|^mary$|la cucina|pastito|parmesan|bira nekuda/i},
+  {id:'market',ar:'Groceries',re:/market|am:pm|machsan|super yuda/i},
+  {id:'sweet',ar:'Sweets & bakery',re:/roladin|cookie|ice cream|abulafia|jeraisy|^aldo$|black store|metuka|shake house/i},
+  {id:'hummus',ar:'Hummus',re:/hummus|diana express/i},
+  {id:'chicken',ar:'Chicken',re:/silly kid|chikinn/i},
+  {id:'seafood',ar:'Seafood',re:/shrimso/i},
+  {id:'salad',ar:'Salad',re:/superfood salad/i},
+  {id:'potato',ar:'Potato',re:/mr\.potato|^tiras$/i},
+  {id:'pharm',ar:'Pharmacy',re:/be pharm/i},
+  {id:'other',ar:'Unsorted',re:/./}
+];
+const $=id=>document.getElementById(id);
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const COL=Object.fromEntries(CATS.map(c=>[c.id,css('--c-'+c.id)])),INK={ring:css('--ring'),text:css('--text'),text2:css('--text2'),muted:css('--muted'),bg:css('--bg')},FONT=css('--font');
+const catAr=Object.fromEntries(CATS.map(c=>[c.id,c.ar]));
+const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const TAU=Math.PI*2;
+const orders=RAW.split('\n').map(l=>{const [dt,a,name,branch,src]=l.split('|');const [y,m,d,h,mi]=dt.split(/[- :]/).map(Number);
+  const full=name+(branch?' | '+branch:''),o={d:new Date(y,m-1,d,h,mi),amt:a==='-'?null:+a,full,cat:CATS.find(c=>c.re.test(name==='Alibi'?full:name)).id,born:-1,on:true,u:0,src:src||'w'};
+  o.ang=(h+mi/60)/24*TAU-Math.PI/2;return o});
+/* a food type with no orders gets no button */
+for(let i=CATS.length-1;i>=0;i--)if(!orders.some(o=>o.cat===CATS[i].id))CATS.splice(i,1);
+const nf=n=>Math.round(n).toLocaleString('en-US');
+const dstr=d=>String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear()+' · '+d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');
+
+/* ---------- what the controls hold ---------- */
+const F={cats:new Set(CATS.map(c=>c.id)),year:null,miss:true,speed:1,src:null};
+let T0=0,T1=1,rings=[];
+function applyFilter(){
+  if(F.year){T0=new Date(F.year,0,1).getTime();T1=new Date(F.year+1,0,1).getTime();
+    rings=[0,3,6,9].map(m=>({t:new Date(F.year,m,1).getTime(),label:MON[m]}))}
+  else{T0=new Date(2022,11,1).getTime();T1=new Date(2026,11,1).getTime();
+    rings=[2023,2024,2025,2026].map(y=>({t:new Date(y,0,1).getTime(),label:String(y)}))}
+  orders.forEach(o=>{o.u=(o.d.getTime()-T0)/(T1-T0);o.on=F.cats.has(o.cat)&&(!F.year||o.d.getFullYear()===F.year)&&(F.miss||o.amt!==null)&&(!F.src||o.src===F.src)});
+}
+
+/* ---------- controls ---------- */
+function chips(box,items,isOn,onPick){const el=$(box);el.textContent='';
+  items.forEach(it=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=it.label;b.setAttribute('aria-pressed',String(isOn(it)));
+    b.onclick=()=>{onPick(it);[...el.children].forEach((c,i)=>c.setAttribute('aria-pressed',String(isOn(items[i]))))};el.append(b)})}
+chips('years',[{label:'All',v:null},...[2023,2024,2025,2026].map(y=>({label:String(y),v:y}))],it=>F.year===it.v,it=>{F.year=it.v;applyFilter();restart()});
+chips('apps',[{label:'All',v:null},{label:'Wolt',v:'w'},{label:'Haat',v:'h'}],it=>F.src===it.v,it=>{F.src=it.v;applyFilter();recount()});
+chips('speed',[{label:'Slow',v:.5},{label:'Normal',v:1},{label:'Fast',v:2.5}],it=>F.speed===it.v,it=>{F.speed=it.v});
+chips('misc',[{label:'Unfinished attempts',v:'miss'}],()=>F.miss,()=>{F.miss=!F.miss;applyFilter();recount()});
+const legend=$('legend');
+CATS.forEach(c=>{const li=document.createElement('li'),b=document.createElement('button');b.type='button';b.className='cat';b.dataset.id=c.id;b.setAttribute('aria-pressed','true');
+  b.innerHTML=`<span class="sw" style="background:var(--c-${c.id})"></span><span>${c.ar}</span><span class="n" id="n-${c.id}">0</span>`;
+  b.onclick=()=>{if(F.cats.size===CATS.length)F.cats=new Set([c.id]);else if(F.cats.has(c.id)){F.cats.delete(c.id);if(!F.cats.size)F.cats=new Set(CATS.map(x=>x.id))}else F.cats.add(c.id);
+    legend.querySelectorAll('button.cat').forEach(x=>x.setAttribute('aria-pressed',String(F.cats.has(x.dataset.id))));applyFilter();recount()};
+  li.append(b);legend.append(li)});
+{const li=document.createElement('li');li.className='all';li.innerHTML='<span></span><span>All completed orders</span><span class="n" id="n-all">0</span>';legend.append(li)}
+$('allCats').onclick=()=>{F.cats=new Set(CATS.map(x=>x.id));legend.querySelectorAll('button.cat').forEach(x=>x.setAttribute('aria-pressed','true'));applyFilter();recount()};
+
+/* ---------- canvas ---------- */
+const cv=$('cv'),ctx=cv.getContext('2d');let W=0,dpr=1,R0=0,R1=0,C=0;
+function size(){const r=cv.getBoundingClientRect();W=r.width;dpr=Math.min(window.devicePixelRatio||1,2);cv.width=cv.height=Math.round(W*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
+  C=W/2;R1=W/2-Math.max(44,W*.12);R0=R1*(W<480?.36:.27)}
+const rad=u=>R0+(R1-R0)*Math.max(0,Math.min(1,u));
+const dotR=a=>a===null?Math.max(2.2,W*.0045):Math.max(2.5,W*.0048)+Math.sqrt(a/360)*W*.019;
+const pos=o=>[C+Math.cos(o.ang)*rad(o.u),C+Math.sin(o.ang)*rad(o.u)];
+
+/* ---------- sound: synthesised in the browser, starts only after the Sound button is pressed ---------- */
+const NOTE={burger:261.63,sushi:293.66,pizza:329.63,market:392,sweet:440,hummus:523.25,chicken:659.25,seafood:783.99,salad:698.46,potato:987.77,pharm:880,other:587.33};
+let AC=null,master=null,soundOn=false,keep=null;
+const SILENCE='data:audio/wav;base64,UklGRvQHAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YdAHAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==';
+function initAudio(){try{if(!AC){const K=window.AudioContext||window.webkitAudioContext;AC=new K();master=AC.createGain();master.gain.value=.9;master.connect(AC.destination)}
+  /* iPhones mute Web Audio while the ring switch is on silent; a looping silent media element moves the page to the media channel */
+  try{if(!keep){keep=new Audio(SILENCE);keep.loop=true;keep.setAttribute('playsinline','')}const pr=keep.play();if(pr&&pr.catch)pr.catch(()=>{})}catch(e){}
+  if(AC.state!=='running'){const pr=AC.resume();if(pr&&pr.catch)pr.catch(()=>{})}return true}catch(e){AC=null;return false}}
+function voice(freq,type,peak,dur,pan,at){const t=AC.currentTime+(at||0),o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=freq;
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  let out=g;if(AC.createStereoPanner){const p=AC.createStereoPanner();p.pan.value=pan;g.connect(p);out=p}
+  o.connect(g);out.connect(master);o.start(t);o.stop(t+dur+.05)}
+function ping(o){if(!soundOn||!AC)return;try{const pan=Math.max(-1,Math.min(1,Math.cos(o.ang)*.8));
+  if(o.amt===null){voice(1500,'square',.03,.05,pan);return}
+  const big=o.amt>=150,f=NOTE[o.cat]*(big?.5:1),dur=.45+Math.min(1,o.amt/360)*.9;
+  voice(f,'sine',.22,dur,pan);voice(f*2,'triangle',.05,dur*.6,pan)}catch(e){}}
+function chord(){if(!soundOn||!AC)return;try{[130.81,196,261.63,329.63].forEach((f,i)=>voice(f,'sine',.12,2.6,0,i*.09))}catch(e){}}
+$('sound').onclick=()=>{const b=$('sound');if(soundOn){soundOn=false;try{keep&&keep.pause()}catch(e){}}else{if(!initAudio()){b.textContent='Sound unavailable here';return}soundOn=true;
+    /* a short rising pair of notes right away, so it is clear the sound works */
+    try{voice(392,'sine',.25,.5,0);voice(523.25,'sine',.25,.7,0,.16)}catch(e){}
+    setTimeout(()=>{if(soundOn&&AC&&AC.state!=='running')b.textContent='Sound blocked by this app'},700)}
+  b.setAttribute('aria-pressed',String(soundOn));b.textContent=soundOn?'Sound: on':'Sound: off'};
+
+/* ---------- playback ---------- */
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let n=0,playing=!reduce,nextAt=0,holdUntil=0,total=0,shownTotal=0,hand=-Math.PI/2,handTo=-Math.PI/2,last=null;
+function recount(){let done=0;total=0;const counts={};
+  for(const o of orders)if(o.born>=0&&o.on&&o.amt!==null){done++;total+=o.amt;counts[o.cat]=(counts[o.cat]||0)+1}
+  CATS.forEach(c=>$('n-'+c.id).textContent=counts[c.id]||0);$('n-all').textContent=done}
+function reveal(o,t){o.born=t;last=o;handTo=o.ang;recount();
+  $('mon').textContent=MON[o.d.getMonth()];$('yr').textContent=o.d.getFullYear();
+  $('nowSw').style.background=COL[o.cat];$('nowNm').textContent=o.full;
+  $('nowMeta').textContent=(o.amt===null?'Unfinished attempt':'₪'+o.amt.toFixed(2))+' · '+dstr(o.d)}
+function restart(){pay=null;n=0;holdUntil=0;nextAt=0;last=null;shownTotal=0;orders.forEach(o=>o.born=-1);recount();
+  $('nowNm').textContent='';$('nowMeta').textContent='';$('nowSw').style.background='transparent';$('mon').textContent='';$('yr').textContent=F.year||'';
+  if(reduce)showAll(performance.now())}
+function skipOff(t){while(n<orders.length&&!orders[n].on){orders[n].born=t-5000;n++}}
+function showAll(t){for(;n<orders.length;n++){const o=orders[n];if(o.on)reveal(o,t-5000);else o.born=t-5000}}
+/* payment moment: with each paid order a tap-to-pay sign and the amount light up behind the dial, then fade before the next one */
+let pay=null;const PAY=900;
+const rgba=(hex,a)=>{const n=parseInt(hex.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`};
+/* one fixed, quiet spot in the top-left corner, so the eye stays on the dial */
+const paySpot=()=>[.13,.065];
+function drawPay(t){if(!pay)return;const q=(t-pay.t)/(PAY/Math.sqrt(F.speed));if(q>=1||!pay.o.on){pay=null;return}
+  const a=q<.12?q/.12:1-(q-.12)/.88,fs=Math.max(11,W*.027),px=pay.x*W,py=pay.y*W;
+  ctx.save();ctx.translate(px,py);
+  ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`500 ${fs}px ${FONT}`;const txt='₪'+pay.o.amt.toFixed(2),tw=ctx.measureText(txt).width,shift=fs*.55;
+  ctx.fillStyle=rgba('#f1eee8',.75*a);ctx.fillText(txt,shift,0);
+  /* three tap-to-pay waves before the amount, lighting up one after another */
+  ctx.lineCap='round';ctx.lineWidth=Math.max(1.2,fs*.1);const wx=shift-tw/2-fs*.95;
+  for(let k=0;k<3;k++){const on=Math.max(0,Math.min(1,(q-k*.1)/.12));if(!on)continue;ctx.strokeStyle=rgba('#f1eee8',.6*a*on);ctx.beginPath();ctx.arc(wx,0,fs*(.16+k*.2),-.75,.75);ctx.stroke()}
+  ctx.restore()}
+const back=x=>{const c=1.9;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+
+function draw(t){
+  ctx.clearRect(0,0,W,W);
+  const f=Math.max(11,W*.02);
+  ctx.beginPath();ctx.moveTo(C,C);ctx.arc(C,C,R1,(-6/24)*TAU-Math.PI/2,(6/24)*TAU-Math.PI/2);ctx.closePath();ctx.fillStyle='rgba(255,255,255,.022)';ctx.fill();
+  drawPay(t);
+  /* date rings: years, or quarters when one year is picked */
+  ctx.lineWidth=1;ctx.strokeStyle=INK.ring;ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.beginPath();ctx.arc(C,C,R0,0,TAU);ctx.stroke();ctx.beginPath();ctx.arc(C,C,R1,0,TAU);ctx.stroke();
+  const a8=(8/24)*TAU-Math.PI/2;ctx.font=`300 ${Math.max(10,f*.8)}px ${FONT}`;
+  rings.forEach((g,i)=>{const u=(g.t-T0)/(T1-T0),r=rad(u);if(u>0.001){ctx.beginPath();ctx.arc(C,C,r,0,TAU);ctx.stroke()}
+    const next=i+1<rings.length?(rings[i+1].t-T0)/(T1-T0):1,rm=rad((Math.max(0,u)+next)/2);ctx.fillStyle=INK.muted;ctx.fillText(g.label,C+Math.cos(a8)*rm,C+Math.sin(a8)*rm)});
+  /* hours */
+  for(let h=0;h<24;h++){const a=h/24*TAU-Math.PI/2,big=h%6===0,r1=R1+(big?W*.014:W*.007);ctx.beginPath();ctx.moveTo(C+Math.cos(a)*R1,C+Math.sin(a)*R1);ctx.lineTo(C+Math.cos(a)*r1,C+Math.sin(a)*r1);ctx.strokeStyle=big?INK.text2:INK.ring;ctx.stroke();
+    if(h%3===0){ctx.fillStyle=big?INK.text2:INK.muted;ctx.font=`${big?400:300} ${big?f:f*.85}px ${FONT}`;const rl=R1+W*.036;ctx.fillText(h===0?'24':String(h),C+Math.cos(a)*rl,C+Math.sin(a)*rl)}}
+  /* hand */
+  let d=handTo-hand;d=Math.atan2(Math.sin(d),Math.cos(d));hand+=d*.18;
+  if(last&&n<orders.length){ctx.beginPath();ctx.moveTo(C+Math.cos(hand)*R0,C+Math.sin(hand)*R0);ctx.lineTo(C+Math.cos(hand)*R1,C+Math.sin(hand)*R1);ctx.strokeStyle='rgba(241,238,232,.28)';ctx.lineWidth=1;ctx.stroke()}
+  /* orders */
+  for(const o of orders){if(o.born<0||!o.on)continue;const age=t-o.born,[x,y]=pos(o),k=Math.min(1,age/480),r=dotR(o.amt)*Math.max(0,back(k));
+    if(age<1100){const q=age/1100;ctx.beginPath();ctx.arc(x,y,dotR(o.amt)+q*W*.05,0,TAU);ctx.strokeStyle=COL[o.cat];ctx.globalAlpha=(1-q)*.7;ctx.lineWidth=1.5;ctx.stroke();ctx.globalAlpha=1}
+    ctx.beginPath();ctx.arc(x,y,r,0,TAU);
+    if(o.amt===null){ctx.strokeStyle=COL[o.cat];ctx.lineWidth=1.3;ctx.stroke()}
+    else{ctx.fillStyle=COL[o.cat];ctx.globalAlpha=.86;ctx.fill();ctx.globalAlpha=1;ctx.lineWidth=1;ctx.strokeStyle=INK.bg;ctx.stroke()}}
+  shownTotal+=(total-shownTotal)*.15;$('sum').textContent='₪'+nf(shownTotal);
+}
+function frame(t){
+  if(playing&&W>20)try{
+    skipOff(t);
+    if(n<orders.length){if(t>=nextAt){const o=orders[n];reveal(o,t);ping(o);if(o.amt!==null){const [x,y]=paySpot();pay={o,t,x,y}}n++;skipOff(t);const nx=orders[n];
+        const near=nx&&nx.d-o.d<36e5,gap=nx?(nx.d-o.d)/864e5:0;nextAt=t+(near?150:Math.min(620,300+gap*4))/F.speed}}
+    else if(!holdUntil){holdUntil=t+9000;chord()}
+    else if(t>holdUntil)restart();
+  }catch(e){}
+  try{if(cv.clientWidth&&Math.abs(cv.clientWidth-W)>1)size();if(W>20)draw(t)}catch(e){}
+  requestAnimationFrame(frame);
+}
+$('toggle').onclick=()=>{playing=!playing;$('toggle').textContent=playing?'Pause':'Resume';if(playing&&n>=orders.length)restart()};
+$('again').onclick=()=>{restart();playing=!reduce;$('toggle').textContent=playing?'Pause':'Resume'};
+
+/* pointing at a dot names the order */
+const tip=$('tip');
+function pick(e){const r=cv.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;let best=null,bd=1e9;
+  for(const o of orders){if(o.born<0||!o.on)continue;const [x,y]=pos(o),d=Math.hypot(x-mx,y-my)-dotR(o.amt);if(d<8&&d<bd){bd=d;best=o}}
+  if(!best){tip.hidden=true;return}
+  tip.textContent='';const b=document.createElement('b');b.textContent=best.full;const s=document.createElement('div');
+  s.textContent=(best.amt===null?'Unfinished attempt':'₪'+best.amt.toFixed(2)+' · '+catAr[best.cat]);const s2=document.createElement('div');s2.textContent=dstr(best.d);
+  tip.append(b,s,s2);tip.hidden=false;const tr=tip.getBoundingClientRect();
+  tip.style.left=Math.min(window.innerWidth-tr.width-8,Math.max(8,e.clientX-tr.width/2))+'px';tip.style.top=Math.max(8,e.clientY-tr.height-14)+'px'}
+$('stage').addEventListener('pointermove',pick);$('stage').addEventListener('click',pick);$('stage').addEventListener('pointerleave',()=>{tip.hidden=true});
+
+applyFilter();
+new ResizeObserver(size).observe(cv);size();
+if(reduce){showAll(performance.now());$('toggle').textContent='Resume'}
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
